@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<ClassDiagram Zoom="1" MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="kartMania.Forms.MainForm" Collapsed="False">
+    <Position X="0.5" Y="16.6" Width="2.241832" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="False" />
+      <Compartment Name="Methods" Collapsed="False" />
+      <Compartment Name="Fields" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Game.Engine" Collapsed="False">
+    <Position X="0.5" Y="22.5" Width="1.820363" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="False" />
+      <Compartment Name="Methods" Collapsed="False" />
+      <Compartment Name="Fields" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Physics.PhysicsEngine" Collapsed="False">
+    <Position X="0.5" Y="25.3" Width="2.067272" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="False" />
+      <Compartment Name="Fields" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Physics.Shapes.RigidBody" Collapsed="False">
+    <Position X="0.5" Y="0.5" Width="1.649562" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="False" />
+      <Compartment Name="Fields" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Physics.PhyisicsConstants" Collapsed="False">
+    <Position X="0.5" Y="27.3" Width="2.198288" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Game.RenderEngine" Collapsed="False">
+    <Position X="0.5" Y="28.7" Width="2.279269" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="False" />
+      <Compartment Name="Fields" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Video.DrawableBackground" Collapsed="False">
+    <Position X="0.5" Y="31.3" Width="2.745856" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="False" />
+      <Compartment Name="Fields" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Forms.GameForm" Collapsed="False">
+    <Position X="0.5" Y="34.2" Width="2.273522" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="False" />
+      <Compartment Name="Methods" Collapsed="False" />
+      <Compartment Name="Fields" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Physics.Vec2" Collapsed="False">
+    <Position X="0.5" Y="37.7" Width="1.713424" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="False" />
+      <Compartment Name="Methods" Collapsed="False" />
+      <Compartment Name="Fields" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Program" Collapsed="False">
+    <Position X="0.5" Y="45.3" Width="1.444186" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Forms.GameRoomForm" Collapsed="False">
+    <Position X="0.5" Y="46.6" Width="2.6" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="False" />
+      <Compartment Name="Methods" Collapsed="False" />
+      <Compartment Name="Fields" Collapsed="False" />
+      <Compartment Name="Nested Types" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Structs.GameRoomInfo" Collapsed="False">
+    <Position X="0.5" Y="53.6" Width="2.177594" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="False" />
+      <Compartment Name="Fields" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Network.NetMsg" Collapsed="False">
+    <Position X="0.5" Y="56.3" Width="2" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="False" />
+      <Compartment Name="Methods" Collapsed="False" />
+      <Compartment Name="Fields" Collapsed="False" />
+      <Compartment Name="Nested Types" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Network.NetMsgQueue" Collapsed="False">
+    <Position X="0.5" Y="61.8" Width="2" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="False" />
+      <Compartment Name="Methods" Collapsed="False" />
+      <Compartment Name="Fields" Collapsed="False" />
+      <Compartment Name="Nested Types" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Physics.Contact" Collapsed="False">
+    <Position X="0.5" Y="68.4" Width="1.296628" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Physics.Shapes.RigidBox" Collapsed="False">
+    <Position X="3.3" Y="0.5" Width="1.575978" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="False" />
+      <Compartment Name="Fields" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Video.DrawableBox" Collapsed="False">
+    <Position X="5.4" Y="0.5" Width="1.927086" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="False" />
+      <Compartment Name="Fields" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Network.NetClient" Collapsed="False">
+    <Position X="0.5" Y="3.5" Width="1.862956" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="False" />
+      <Compartment Name="Methods" Collapsed="False" />
+      <Compartment Name="Fields" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Game.LobbyMsgHandler" Collapsed="False">
+    <Position X="0.5" Y="42.7" Width="2.198288" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Forms.CreateRoomForm" Collapsed="False">
+    <Position X="6.6" Y="50.4" Width="2.70756" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="False" />
+      <Compartment Name="Methods" Collapsed="False" />
+      <Compartment Name="Fields" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Forms.GameRoomsList" Collapsed="False">
+    <Position X="4.4" Y="50.4" Width="2.266969" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="False" />
+      <Compartment Name="Fields" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Comment CommentText="">
+    <Position X="4.7" Y="48.2" Width="1.8" Height="2" />
+  </Comment>
+  <Class Name="kartMania.Network.NetManager" Collapsed="False">
+    <Position X="3.1" Y="3.5" Width="1.870636" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="False" />
+      <Compartment Name="Fields" Collapsed="False" />
+    </Compartments>
+  </Class>
+  <Class Name="kartMania.Game.NetEngine" Collapsed="False">
+    <Position X="5.9" Y="3.5" Width="1.737487" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="False" />
+    </Compartments>
+  </Class>
+</ClassDiagram>
