@@ -85,9 +85,9 @@ namespace kartManiaServer.Network
 					
 			GameRoom gameRoom = new GameRoom(player, gri);
 			
-			gameRoom.OnPlayerJoin += new GameRoom.OnGameRoomPlayersJoinLeave(gameRoom_OnPlayerJoin);
-			gameRoom.OnPlayerLeft += new GameRoom.OnGameRoomPlayersJoinLeave(gameRoom_OnPlayerLeft);
-			gameRoom.OnGameRoomDestroy += new GameRoom.OnGameRoomDestroyEventHandler(gameRoom_OnGameRoomDestroy);
+			gameRoom.OnPlayerJoin 		+= new GameRoom.OnGameRoomPlayersJoinLeave   (gameRoom_OnPlayerJoin);
+			gameRoom.OnPlayerLeft 		+= new GameRoom.OnGameRoomPlayersJoinLeave	 (gameRoom_OnPlayerLeft);
+			gameRoom.OnGameRoomDestroy 	+= new GameRoom.OnGameRoomDestroyEventHandler(gameRoom_OnGameRoomDestroy);
 			
 			gri.ownerName  = player.Name;
 			gri.gameRoomId = gameRoom.RoomId;

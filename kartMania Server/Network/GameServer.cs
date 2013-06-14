@@ -7,8 +7,9 @@
  */
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
-
+using System.Linq;
 using kartManiaCommons.Debug;
 using kartManiaCommons.Network;
 using kartManiaServer.Structs;
@@ -20,15 +21,15 @@ namespace kartManiaServer.Network
 	/// </summary>
 	public class GameServer:NetServer
 	{
-		private UnnamedLobby unnamedLobby;
-		private MainLobby    mainLobby;
-		private ArrayList    gameRoomsList;
+		private UnnamedLobby 			unnamedLobby;
+		private MainLobby    			mainLobby;
+		private LinkedList<GameRoom>    gameRoomsList;
 		 
 		public GameServer()
 		{
 			unnamedLobby  = new UnnamedLobby();
 			mainLobby	  = new MainLobby();
-			gameRoomsList = new ArrayList();
+			gameRoomsList = new LinkedList<GameRoom>();
 		}
 		
 		public override void Start()
@@ -66,10 +67,17 @@ namespace kartManiaServer.Network
 					Console.Out.WriteLine(gameRoomsList.Count);
 					break;
 				case "gr_list":
-					Console.WriteLine("room to list =");
-					int x = int.Parse(Console.ReadLine());
-					GameRoom room = (GameRoom)gameRoomsList[x];
-					room.PrintPlayers();
+					Console.Write("room to list = ");
+
+					int roomIndex;
+					int.TryParse(Console.ReadLine(), out roomIndex);
+					GameRoom room = gameRoomsList.ElementAt(roomIndex);
+					
+					if (room != null)
+						room.PrintPlayers();
+					break;
+				default:
+					Console.Out.WriteLine("Not a valid command");
 					break;
 			}
 		}
@@ -89,7 +97,7 @@ namespace kartManiaServer.Network
 		private void PlayerCreateGameRoom(GameRoom gameRoom)
 		{
 			lock(gameRoomsList)
-				gameRoomsList.Add(gameRoom);
+				gameRoomsList.AddLast(gameRoom);
 			
 			gameRoom.OnGameRoomDestroy += new GameRoom.OnGameRoomDestroyEventHandler(DestroyGameRoom);
 		}
@@ -120,10 +128,9 @@ namespace kartManiaServer.Network
 			
 			msg.Writer.Write(gameRoomsList.Count);
 			
-			for(int i = 0; i < gameRoomsList.Count; i++)
+			foreach(GameRoom room in gameRoomsList)
 			{
-				GameRoom     room = (GameRoom)gameRoomsList[i];
-				GameRoomInfo gri  = room.RoomInfo; 
+				GameRoomInfo gri = room.RoomInfo;
 				
 				msg.Writer.Write(gri.roomName  );
 				msg.Writer.Write(gri.maxPlayers);

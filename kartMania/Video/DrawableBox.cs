@@ -15,7 +15,7 @@ using SharpGL.SceneGraph.Assets;
 namespace kartMania.Video
 {
 	/// <summary>
-	/// Description of DrawableBox.
+	/// Deprecated class
 	/// </summary>
 	public class DrawableBox:RigidBox
 	{

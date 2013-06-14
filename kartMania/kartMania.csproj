@@ -90,6 +90,8 @@
     <Compile Include="Physics\Contact.cs" />
     <Compile Include="Physics\PhyisicsConstants.cs" />
     <Compile Include="Physics\PhysicsEngine.cs" />
+    <Compile Include="Physics\Shapes\IRigidBody.cs" />
+    <Compile Include="Physics\Shapes\IRigidBox.cs" />
     <Compile Include="Physics\Shapes\RigidBody.cs" />
     <Compile Include="Physics\Shapes\RigidBox.cs" />
     <Compile Include="Physics\Vec2.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Structs\GameRoomInfo.cs" />
     <Compile Include="Video\DrawableBackground.cs" />
     <Compile Include="Video\DrawableBox.cs" />
+    <Compile Include="Video\IDrawableBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\CreateRoomForm.resx">

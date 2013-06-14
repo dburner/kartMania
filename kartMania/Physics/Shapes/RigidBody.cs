@@ -10,7 +10,7 @@ using System;
 namespace kartMania.Physics.Shapes
 {
 	/// <summary>
-	/// Description of RigidBody.
+	/// Deprecated class
 	/// </summary>
 	public class RigidBody
 	{
