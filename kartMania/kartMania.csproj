@@ -82,6 +82,7 @@
     </Compile>
     <Compile Include="Game\LobbyMsgHandler.cs" />
     <Compile Include="Game\NetEngine.cs" />
+    <Compile Include="Game\GameCar.cs" />
     <Compile Include="Game\RenderEngine.cs" />
     <Compile Include="Network\NetClient.cs" />
     <Compile Include="Network\NetManager.cs" />

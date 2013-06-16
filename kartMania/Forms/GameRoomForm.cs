@@ -24,8 +24,9 @@ namespace kartMania.Forms
 			Starting	  = 3,
 		}
 				
-		public static GameRoomForm Instance { get; private set; }
-		public static uint RoomId 	  { get; set; }
+		public static GameRoomForm Instance   { get; private set; }
+		//public static Status	   GameStatus { get; private set; }
+		public static uint 		   RoomId 	  { get; set; }
 		
 		public static bool FormOpened
 		{
@@ -116,6 +117,11 @@ namespace kartMania.Forms
 		{
 			FormOpened = false;
 			Engine.Network.LeaveGameRoom();
+		}
+		
+		void StartButtonClick(object sender, EventArgs e)
+		{
+			
 		}
 	}
 }

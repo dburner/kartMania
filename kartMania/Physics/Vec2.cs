@@ -14,6 +14,7 @@ namespace kartMania.Physics
 	/// </summary>
 	public class Vec2
 	{
+		//TODO overwrite += operator for extra optimization
 		private double mx; //TODO put float
 		private double my;
 		

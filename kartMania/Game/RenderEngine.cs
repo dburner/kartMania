@@ -43,7 +43,7 @@ namespace kartMania.Game
 			box.Rotate(Math.PI);
 			box.Init(gl, "Images\\Car_01.png");
 			box.Scale(0.5);
-			box.Rotate(Math.PI);
+			box.Rotate(Math.PI*1.2);
 			playerObjects.Add(box);
 			
 			//box = new DrawableBox(new Vec2(167, 112), 175, 84);
