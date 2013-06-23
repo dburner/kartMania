@@ -88,7 +88,7 @@ namespace kartManiaServer.Network
 			Logger.LogLine("Client connected");
 		}
 		
-		//Derpecated
+		//Derpecated...server is now event driven
 		protected void OnTick(double tickDelta)
 		{
 			

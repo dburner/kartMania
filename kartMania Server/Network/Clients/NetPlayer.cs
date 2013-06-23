@@ -21,7 +21,7 @@ namespace kartManiaServer.Network
 	/// </summary>
 	public class NetPlayer:NetClient
 	{
-		private static uint uniqueId = 0;
+		private static uint   uniqueId = 0;
 		private static ushort firstLobbyValue = (ushort)NetLobbyService.FirstValue;
 		private static ushort  lastLobbyValue = (ushort)NetLobbyService.LastValue;
 		
@@ -74,7 +74,7 @@ namespace kartManiaServer.Network
 		
 		protected void OnMessageReceived(NetMsg msg)
 		{
-			//Logger.LogLine(Name + " " + msg.Service);
+			Logger.LogLine(Name + " " + msg.Service, Logger.ServerLogLevel.Subtle);
 			
 			if (IsLobbyService(msg.Service))
 			{

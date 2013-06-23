@@ -23,10 +23,10 @@ namespace kartManiaServer.Network
 		}
 		
 		public delegate void CreateGameRoomEventHandler(GameRoom gameRoom);
-		public event CreateGameRoomEventHandler OnCreateGameRoom;
+		public event 		 CreateGameRoomEventHandler OnCreateGameRoom;
 		
 		public delegate void JoinGameRoomEventHandler(NetPlayer player, uint gameRoomId);
-		public event JoinGameRoomEventHandler OnPlayerJoinGameRoom;
+		public event 		 JoinGameRoomEventHandler OnPlayerJoinGameRoom;
 		
 		protected override void OnClientConnect(NetPlayer client)
 		{
@@ -66,7 +66,7 @@ namespace kartManiaServer.Network
 			SendMsgToAll(sendMsg);
 		}
 		
-		private void JoinGameRoom(NetPlayer player, NetMsg msg)
+		private void JoinGameRoom   (NetPlayer player, NetMsg msg)
 		{
 			uint gameRoomId = msg.Reader.ReadUInt32();
 			
@@ -74,12 +74,12 @@ namespace kartManiaServer.Network
 				OnPlayerJoinGameRoom(player, gameRoomId);
 		}
 		
-		private void CreateGameRoom(NetPlayer player, NetMsg msg)
+		private void CreateGameRoom (NetPlayer player, NetMsg msg)
 		{
 			GameRoomInfo gri = new GameRoomInfo();
 			
 			gri.roomName   = msg.Reader.ReadString();
-			gri.maxPlayers = msg.Reader.ReadByte();
+			gri.maxPlayers = msg.Reader.ReadByte  ();
 			gri.trackName  = msg.Reader.ReadString();
 			gri.password   = msg.Reader.ReadString();
 					

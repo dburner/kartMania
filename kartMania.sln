@@ -2,14 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 # SharpDevelop 4.2.2.8818
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kartMania", "kartMania\kartMania.csproj", "{DE299B75-0C75-46F1-AC7E-91E51AB12573}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kartMania Server", "kartMania Server\kartMania Server.csproj", "{0C8D3D76-FDDC-4672-861B-E1D4248043B9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kartManiaCommons", "kartManiaCommons\kartManiaCommons.csproj", "{A9F40E1E-378B-44CF-8A58-21243A6DF539}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kartMania Testing", "kartMania Testing\kartMania Testing.csproj", "{F884FB20-D0BE-4372-8EEC-C65C21B06911}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharpGL", "SharpGL", "{78BB11BC-F549-4F66-97D8-AD2CAA504073}"
 	ProjectSection(SolutionItems) = postProject
 	EndProjectSection
@@ -19,6 +11,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGL.WinForms", "..\..\C# Downloads\SharpGL\Core\SharpGL.WinForms\SharpGL.WinForms.csproj", "{B2984A6D-AD1C-4BE9-94AB-BA002B338751}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGL.SceneGraph", "..\..\C# Downloads\SharpGL\Core\SharpGL.SceneGraph\SharpGL.SceneGraph.csproj", "{47BCAA39-EDAD-4404-B6BD-4742B0ABB523}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kartMania", "kartMania\kartMania.csproj", "{DE299B75-0C75-46F1-AC7E-91E51AB12573}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kartMania Server", "kartMania Server\kartMania Server.csproj", "{0C8D3D76-FDDC-4672-861B-E1D4248043B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kartManiaCommons", "kartManiaCommons\kartManiaCommons.csproj", "{A9F40E1E-378B-44CF-8A58-21243A6DF539}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kartMania Testing", "kartMania Testing\kartMania Testing.csproj", "{F884FB20-D0BE-4372-8EEC-C65C21B06911}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

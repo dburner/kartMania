@@ -27,14 +27,14 @@ namespace kartManiaServer.Network
 		private NetPlayer owner;
 		
 		public delegate void OnGameRoomDestroyEventHandler(GameRoom gameRoom);
-		public event OnGameRoomDestroyEventHandler OnGameRoomDestroy;
+		public event 		 OnGameRoomDestroyEventHandler OnGameRoomDestroy;
 		
 		public delegate void OnGameRoomPlayersJoinLeave(GameRoom gameRoom);
-		public event OnGameRoomPlayersJoinLeave OnPlayerJoin;
-		public event OnGameRoomPlayersJoinLeave OnPlayerLeft;
+		public event 		 OnGameRoomPlayersJoinLeave OnPlayerJoin;
+		public event 		 OnGameRoomPlayersJoinLeave OnPlayerLeft;
 		
-		public GameRoomInfo RoomInfo { get; set; }
-		public int PlayersCount { get { return playersList.Count; } }
+		public GameRoomInfo RoomInfo     { get; set; }
+		public int 			PlayersCount { get { return playersList.Count; } }
 		
 		public GameRoom()
 		{
@@ -42,9 +42,10 @@ namespace kartManiaServer.Network
 		
 		public GameRoom(NetPlayer ownerPlayer, GameRoomInfo roomInfo)
 		{
-			owner = ownerPlayer;
-			AddPlayer(owner);
+			owner    = ownerPlayer;
 			RoomInfo = roomInfo;
+			AddPlayer(owner);
+			
 			//TODO Override constructorul de baza din netroom cu numarul corect de jucatori 
 		}
 		
@@ -141,6 +142,7 @@ namespace kartManiaServer.Network
 			
 			SendMsgToAll(msg);
 		}
+		
 		
 		#region Debug only
 		

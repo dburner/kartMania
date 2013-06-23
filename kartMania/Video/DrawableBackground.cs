@@ -80,11 +80,13 @@ namespace kartMania.Video
 			texture.Bind(gl);
 			
 			gl.PushMatrix();
+			gl.Scale(1d, -1d, 1d);
+			gl.Translate(0d, -RenderEngine.Height, 0d);
 			
 			gl.Begin(BeginMode.Quads);
 			
 				gl.Color(white, white, white);
-				gl.Scale(1d, -1d, 1d);
+				//gl.Scale(1d, -1d, 1d);
 				gl.TexCoord(mTexCoords[0].X, mTexCoords[0].Y); gl.Vertex(mPoints[0].X, mPoints[0].Y);
 				gl.TexCoord(mTexCoords[1].X, mTexCoords[1].Y); gl.Vertex(mPoints[1].X, mPoints[1].Y);
 				gl.TexCoord(mTexCoords[2].X, mTexCoords[2].Y); gl.Vertex(mPoints[2].X, mPoints[2].Y);
@@ -92,7 +94,7 @@ namespace kartMania.Video
 				
 			gl.End();
 			
-			gl.PopMatrix()
+			gl.PopMatrix();
 		}	
 
 	}

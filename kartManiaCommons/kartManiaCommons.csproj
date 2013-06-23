@@ -50,6 +50,7 @@
   <ItemGroup>
     <Folder Include="Debug" />
     <Folder Include="Network" />
+    <Folder Include="Network\Messages" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>

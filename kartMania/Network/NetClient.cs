@@ -61,12 +61,18 @@ namespace kartMania.Network
 		
 		public virtual void Disconnect()
 		{
+			// Close = Disconnect + Dispose
 			if (client != null)
 				client.Close();
 			//client.Disconnect(false);
 			//client.Dispose();
 		 	connected = false;
 			//msgQueue.Dispose();
+		}
+		
+		public virtual void OnDisconnect()
+		{
+			
 		}
 		
 		#endregion

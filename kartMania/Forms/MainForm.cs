@@ -63,19 +63,20 @@ namespace kartMania.Forms
 			gameRoomsList.DestroyGameRoom(roomId);
 		}
 		
-		void ConnectButtonClick(object sender, EventArgs e)
+		
+		private void ConnectButtonClick   (object sender, EventArgs e)
 		{
 			Engine.Network.Connect("127.0.0.1", 1234);
 			Engine.Network.SendName(nameTextBox.Text);
 			Logger.LogLine("Connection: " + Engine.Network.Connected.ToString());
 		}
 		
-		void DisconnectButtonClick(object sender, EventArgs e)
+		private void DisconnectButtonClick(object sender, EventArgs e)
 		{
 			Engine.Network.Disconnect();
 		}
 		
-		void CreateButtonClick(object sender, EventArgs e)
+		private void CreateButtonClick    (object sender, EventArgs e)
 		{
 			if (!CreateRoomForm.FormOpened)
 				new CreateRoomForm().Show();
@@ -83,7 +84,7 @@ namespace kartMania.Forms
 				CreateRoomForm.Instance.BringToFront();
 		}
 		
-		void ChatInputBoxKeyDown(object sender, KeyEventArgs e)
+		private void ChatInputBoxKeyDown  (object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.Enter)
 			{
@@ -93,7 +94,7 @@ namespace kartMania.Forms
 		}
 		
 		
-		void Button1Click(object sender, EventArgs e)
+		private void Button1Click(object sender, EventArgs e)
 		{
 			new GameForm().Show();
 		}

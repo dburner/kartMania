@@ -18,12 +18,11 @@ namespace kartManiaServer.Network
 	public class NetClient
 	{	
         private Socket      socket; 
-      //private GameRoom    gameRoom; //A client belongs in a room or not
         
         private const int   bufferSize = 1024;
         private byte[]      byteBuffer;
         
-        protected volatile NetMsgQueue msgQueue;
+        protected volatile  NetMsgQueue msgQueue;
         
         #region Constructors
         
@@ -143,7 +142,13 @@ namespace kartManiaServer.Network
             	//int bytesSent = client.EndSend(ar);
             	socket.EndSend(ar);
 
-        	} catch (Exception e) 
+        	} 
+        	catch(ObjectDisposedException e)
+        	{
+        		Logger.LogLine("Socket closed while sending data.");
+        		Disconnect();
+        	}
+        	catch (Exception e)
         	{
         		Logger.LogLine(e.ToString());
         	}

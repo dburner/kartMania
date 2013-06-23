@@ -17,8 +17,9 @@ namespace kartMania.Game
 	/// </summary>
 	public class Engine
 	{
-		public static Engine Instance   { get; private set; }
-		public static NetEngine Network { get { return Instance.netEngine; } }
+		// TODO Implement corect singletone instance
+		public static Engine    Instance { get; private set; }
+		public static NetEngine Network  { get { return Instance.netEngine; } }
 		
 		private NetEngine    netEngine;
 		public  RenderEngine renEngine;

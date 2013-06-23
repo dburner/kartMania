@@ -18,14 +18,12 @@ namespace kartManiaServer.Network
     {
         private byte[] mBuffer;
 
-        private int mFirst = 0;
-        private int mLast = -1;
+        private int mFirst =  0;
+        private int mLast  = -1;
         private int mSize;
         private int mGrowSize;
-        
-        //private bool allreadyChecked = false;
 
-        private const int mDefaultSize = 4096;
+        private const int mDefaultSize     = 4096;
         private const int mDefaultGrowSize = 4096;
 
         #region Constructors
@@ -67,7 +65,7 @@ namespace kartManiaServer.Network
                     FreeUpSpace();
                 else //if not make the buffer bigger
                     GrowBuffer();
-                //BUG: if buffer dosent grow enough
+                //TODO BUG: if buffer dosent grow enough
             }
 
             //Copy the new data to the queue
@@ -165,7 +163,7 @@ namespace kartManiaServer.Network
         }
 
         /// <summary>
-        /// Redimension the buffer because the queue has become full
+        /// Redimension the buffer because the queue has become full.
         /// </summary>
         private void GrowBuffer()
         {
@@ -212,25 +210,3 @@ namespace kartManiaServer.Network
         #endregion
     }
 }
-
- /*
-        public bool MessageAvalible()
-        {
-        	if ( allreadyChecked )
-        		return false;
-        	if ( mLast < mFirst + 3 )
-        	{
-        		allreadyChecked = true;
-        		return false;
-        	}
-        	
-        	ushort length = ConvertBytes(mBuffer[mFirst+2], mBuffer[mFirst+3]);
-        	
-        	if ( length > UsedSpace )
-        	{
-        		allreadyChecked = true;
-        		return false;
-        	}
-        	
-        	return true;
-        } */
