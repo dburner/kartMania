@@ -43,8 +43,8 @@ namespace kartMania_Testing
 		
 		public static void Main(string[] args)
 		{	
-			StaticCtorTesting();
-			//NetMsgQueue.RegisterMsgTypes();
+			//StaticCtorTesting();
+			NetMsgQueue.RegisterMsgTypes();
 			
 			Console.ReadLine();
 		}

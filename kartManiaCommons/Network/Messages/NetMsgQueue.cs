@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
+using kartManiaCommons.Debug;
 
 namespace kartManiaCommons.Network.Messages
 {
@@ -52,6 +53,8 @@ namespace kartManiaCommons.Network.Messages
         {
         	if (!mNetMsgConstructors.ContainsKey(service))
         		mNetMsgConstructors.Add(service, typeConstructor);
+        	
+        	Logger.LogLine("Registered service: " + service + " with " + typeConstructor.Method.DeclaringType.Name, Logger.ServerLogLevel.Verbose);
         	//mNetMsgConstructors[service] = typeConstructor;
         }
         
@@ -164,6 +167,7 @@ namespace kartManiaCommons.Network.Messages
         	mFirst += length;
         	
         	NetMsg msg = new NetMsg(service, data);
+        	//NetMsg msg = mNetMsgConstructors[service](data);
         	
         	return msg;
         }

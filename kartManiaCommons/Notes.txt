@@ -26,3 +26,22 @@ foreach(var method in methodsArray)
         }
     }
 }
+
+
+Not a good ideea
+
+public static MyDelegate GetMyDelegateFromStringReflection(string methodName)
+        {
+            MyDelegate function = MyFunctionsClass.CallMethodOne;
+
+            Type inf = typeof(MyFunctionsClass);
+            foreach (var method in inf.GetMethods())
+            {
+                if (method.Name == methodName)
+                {
+                    function = (MyDelegate)Delegate.CreateDelegate(typeof(MyDelegate), method);
+                }
+            }
+
+            return function;
+        }

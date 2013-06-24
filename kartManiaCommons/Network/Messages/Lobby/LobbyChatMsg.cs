@@ -22,7 +22,6 @@ namespace kartManiaCommons.Network.Messages.Lobby
 		static LobbyChatMsg()
 		{
 			NetMsgQueue.RegisterMsgType(service, CreateInstance);
-			Console.WriteLine(typeof(LobbyChatMsg).Name + " registered.");
 		}
 		
 		private static NetMsg CreateInstance(byte[] data)

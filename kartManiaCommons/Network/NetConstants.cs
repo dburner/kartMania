@@ -20,18 +20,18 @@ namespace kartManiaCommons.Network
 	public enum NetLobbyService:ushort
 	{
 		FirstValue = NetService.LastValue+1,
-		LobbyChat,
-		JoinGameRoom,
-		JoinGameRoomSucces,
-		JoinGameRoomFail,
-		CreateGameRoom,
-		GameRoomCreated,
-		GameRoomDestroyed,
+		LobbyChat,			   // 5
+		JoinGameRoom,		   // 6
+		JoinGameRoomSucces,    // 7
+		JoinGameRoomFail,	   // 8
+		CreateGameRoom,		   // 9
+		GameRoomCreated,	   //10
+		GameRoomDestroyed,	   //11
 		GameRoomPlayerJoined,  //12
 		GameRoomPlayerLeft,    //13
 		GameRoomUpdatePlayers, //14
-		GameRoomsList,
-		LastValue
+		GameRoomsList,		   //15
+		LastValue			   //16
 	}
 	
 	public enum NetGameRoomSerice:ushort
