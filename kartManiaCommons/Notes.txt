@@ -1,0 +1,28 @@
+﻿/*
+ * Created by SharpDevelop.
+ * User: Ionut
+ * Date: 24.06.2013
+ * Time: 15:43 
+ * 
+ */
+
+Another method for the factory would be to use attributes on the static "constructors".
+Then register all the methods with the specified attribute.
+
+[FactoryBuilderAttribute(ushort service)]
+private static NetMsg CreateInstance(byte[] data)
+{
+	return new SpecialNetMsg(data);
+}
+
+foreach(var method in methodsArray)
+{
+	foreach (Attribute attr in method.GetCustomAttributes(true))
+    {
+        var factAttr = attr as FactoryBuilderAttribute;
+        if (factAttr != null)
+        {
+            RegisterMethod(service : factAttr.Service, method);
+        }
+    }
+}

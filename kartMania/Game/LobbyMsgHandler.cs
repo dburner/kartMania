@@ -21,6 +21,7 @@ namespace kartMania.Game
 	{
 		public static void HandleMsg(NetMsg msg)
 		{
+			//TODO Use delegates array for all this
 			NetLobbyService service = (NetLobbyService)msg.Service;
 			Logger.LogLine(service.ToString());
 			switch (service)
@@ -83,12 +84,12 @@ namespace kartMania.Game
 			bool     isOwner	  = msg.Reader.ReadBoolean();
 			byte     playersCount = msg.Reader.ReadByte();
 			string[] playerNames  = new string[playersCount];
-			uint[]   playerIds	  = new uint[playersCount];
+			uint[]   playerIds	  = new uint  [playersCount];
 			
 			for(int i = 0; i < playersCount; i++)
 			{
 				playerNames[i] = msg.Reader.ReadString();
-				playerIds[i]   = msg.Reader.ReadUInt32();
+				playerIds  [i] = msg.Reader.ReadUInt32();
 			}
 			
 			MainForm.Instance.CreateGameRoomForm(playerNames, playerIds, isOwner);

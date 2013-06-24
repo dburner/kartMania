@@ -43,7 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Debug\Logger.cs" />
-    <Compile Include="MyClass.cs" />
+    <Compile Include="Network\Messages\Lobby\JoinGameRoomMsg.cs" />
+    <Compile Include="Network\Messages\Lobby\LobbyChatMsg.cs" />
+    <Compile Include="Network\Messages\NetMsg.cs" />
+    <Compile Include="Network\Messages\NetMsgException.cs" />
+    <Compile Include="Network\Messages\NetMsgQueue.cs" />
+    <Compile Include="Network\Messages\SpecializedMsgTemplate.cs" />
     <Compile Include="Network\NetConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -51,6 +56,10 @@
     <Folder Include="Debug" />
     <Folder Include="Network" />
     <Folder Include="Network\Messages" />
+    <Folder Include="Network\Messages\Lobby" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Notes.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>
