@@ -21,7 +21,8 @@ namespace kartManiaCommons.Network.Messages.Lobby
 		
 		static LobbyChatMsg()
 		{
-			NetMsgQueue.RegisterMsgType(service, CreateInstance);
+			//NetMsgQueue.RegisterMsgType(service, CreateInstance);
+			NetMsgQueue.RegisterMsgType(service, (data) => { return new LobbyChatMsg(data); });
 		}
 		
 		private static NetMsg CreateInstance(byte[] data)
@@ -45,7 +46,7 @@ namespace kartManiaCommons.Network.Messages.Lobby
 		public LobbyChatMsg()
 			:base(service)
 		{
-			
+			mMessage = "";
 		}
 		
 		/// <summary>
@@ -78,8 +79,7 @@ namespace kartManiaCommons.Network.Messages.Lobby
 			get { return mMessage;  }
 			set
 			{
-				if (mMsgMode != MsgMode.WritingMode)
-					return;
+				AssertWritingMode();
 				mMessage = value; 
 			}
 		}

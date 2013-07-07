@@ -9,7 +9,7 @@ using System;
 
 namespace kartManiaCommons.Network
 {
-	public enum NetService:ushort
+	public enum NetBasicService:ushort
 	{
 		FirstValue = 0,
 		Blank,
@@ -19,7 +19,7 @@ namespace kartManiaCommons.Network
 	
 	public enum NetLobbyService:ushort
 	{
-		FirstValue = NetService.LastValue+1,
+		FirstValue = NetBasicService.LastValue+1,
 		LobbyChat,			   // 5
 		JoinGameRoom,		   // 6
 		JoinGameRoomSucces,    // 7
@@ -34,10 +34,10 @@ namespace kartManiaCommons.Network
 		LastValue			   //16
 	}
 	
-	public enum NetGameRoomSerice:ushort
+	public enum NetGameRoomService:ushort
 	{
 		FirstValue = NetLobbyService.LastValue + 1,
-		SetName,
+		UserSetName,
 		LeaveGameRoom, //18
 		LastValue
 	}

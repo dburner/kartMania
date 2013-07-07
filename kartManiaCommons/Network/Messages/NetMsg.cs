@@ -27,6 +27,9 @@ namespace kartManiaCommons.Network.Messages
 		protected BinaryReader streamReader;
 		protected BinaryWriter streamWriter;
 		
+		
+		private const string writingModeExMsg = "Message is not in writing mode";
+		
 		#region Static Constructors
 		
 		//protected static void CreateInstance(byte[] data)
@@ -63,6 +66,10 @@ namespace kartManiaCommons.Network.Messages
 			this.mLenght  = (ushort)data.Length;
 			mMsgMode       = MsgMode.ReadingMode;
 		}
+		
+		#endregion
+		
+		#region Public Methods
 		
 		public byte[] GetData()
 		{
@@ -110,6 +117,16 @@ namespace kartManiaCommons.Network.Messages
 		}
 		
 		#endregion 
+		
+		#region Protected Methods
+		
+		protected void AssertWritingMode()
+		{
+			if (mMsgMode != MsgMode.WritingMode)
+					new NetMsgException(writingModeExMsg);
+		}
+		
+		#endregion
 		
 		#region Properties
 		

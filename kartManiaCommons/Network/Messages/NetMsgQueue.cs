@@ -28,6 +28,8 @@ namespace kartManiaCommons.Network.Messages
         private const int mDefaultSize     = 4096;
         private const int mDefaultGrowSize = 4096;
         
+        private ByteUnion union = new ByteUnion();
+        
         
         #region Factory related
         
@@ -54,7 +56,7 @@ namespace kartManiaCommons.Network.Messages
         	if (!mNetMsgConstructors.ContainsKey(service))
         		mNetMsgConstructors.Add(service, typeConstructor);
         	
-        	Logger.LogLine("Registered service: " + service + " with " + typeConstructor.Method.DeclaringType.Name, Logger.ServerLogLevel.Verbose);
+        	Logger.LogLine("Registered service: " + service + " \t with " + typeConstructor.Method.DeclaringType.Name, Logger.ServerLogLevel.Verbose);
         	//mNetMsgConstructors[service] = typeConstructor;
         }
         
@@ -214,7 +216,7 @@ namespace kartManiaCommons.Network.Messages
         
         private ushort ConvertBytes(byte x, byte y)
         {
-        	ByteUnion union = new ByteUnion();
+        	//ByteUnion union = new ByteUnion();
         	
         	union.byteA = x;
         	union.byteB = y;

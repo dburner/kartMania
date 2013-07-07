@@ -38,7 +38,7 @@ namespace kartMania.Game
 		
 		public void SendName(string name)
 		{
-			NetMsg msg = new NetMsg((ushort)NetGameRoomSerice.SetName);
+			NetMsg msg = new NetMsg((ushort)NetGameRoomService.UserSetName);
 			
 			msg.Writer.Write(name);
 			
@@ -75,7 +75,7 @@ namespace kartMania.Game
 		
 		public void LeaveGameRoom()
 		{
-			ushort service = (ushort)NetGameRoomSerice.LeaveGameRoom;
+			ushort service = (ushort)NetGameRoomService.LeaveGameRoom;
 			NetMsg msg = new NetMsg(service);
 			
 			SendMsg(msg);

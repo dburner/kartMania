@@ -55,7 +55,6 @@ namespace kartManiaServer.Network
 		/// <summary>
 		/// Obsolete
 		/// </summary>
-		/// <param name="tickDelta"></param>
 		public virtual void OnTick(double tickDelta)
 		{
 			//get NetMsg from queues and execute OnMessageRec

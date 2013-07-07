@@ -40,7 +40,7 @@ namespace kartManiaServer.Network
 		
 		protected override void OnMessageReceived(NetPlayer player, NetMsg msg)
 		{
-			if ( msg.Service == (ushort)NetGameRoomSerice.SetName )
+			if ( msg.Service == (ushort)NetGameRoomService.UserSetName )
 			{
 				player.Name = msg.Reader.ReadString();
 				if ( OnMoveClientToLobby != null)

@@ -26,6 +26,10 @@ namespace kartManiaServer.Network
 		
 		private NetPlayer owner;
 		
+		
+		// TODO rewrite all delegates as
+		// GameRoomEventHandler(GameRoom sender, GameRoomEventArgs)
+		
 		public delegate void OnGameRoomDestroyEventHandler(GameRoom gameRoom);
 		public event 		 OnGameRoomDestroyEventHandler OnGameRoomDestroy;
 		
@@ -84,11 +88,11 @@ namespace kartManiaServer.Network
 		protected override void OnMessageReceived(NetPlayer client, NetMsg msg)
 		{
 			base.OnMessageReceived(client, msg);
-			NetGameRoomSerice service = (NetGameRoomSerice)msg.Service;
+			NetGameRoomService service = (NetGameRoomService)msg.Service;
 			
 			switch (service)
 			{
-				case NetGameRoomSerice.LeaveGameRoom:
+				case NetGameRoomService.LeaveGameRoom:
 					RemovePlayer(client);
 					break;
 			}

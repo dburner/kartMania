@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -23,7 +24,7 @@ namespace kartMania_Testing
 	{
 		private class TestClass
 		{
-			private int x = 0;
+			//private int x = 0;
 			
 			public delegate int MethodDel(int x, int y);
 			public static int Method(int x, int y) { return x+y; }
@@ -38,13 +39,14 @@ namespace kartMania_Testing
 		 	public byte byteB;		 	
 		
 		 	[FieldOffset(0)]
-		 	public ushort intVal;
+		 	public ushort shrotVal;
 		}
 		
 		public static void Main(string[] args)
 		{	
 			//StaticCtorTesting();
 			NetMsgQueue.RegisterMsgTypes();
+			//ConversionTesting();
 			
 			Console.ReadLine();
 		}
@@ -104,9 +106,9 @@ namespace kartMania_Testing
 		{
 			//int x = NetService.LastValue;
 			
-			for(int i = 0; i< (int)NetService.LastValue; i++)
+			for(int i = 0; i< (int)NetBasicService.LastValue; i++)
 			{
-				Console.WriteLine(i + "\t- " + (NetService)i);
+				Console.WriteLine(i + "\t- " + (NetBasicService)i);
 			}
 			
 			for(int i = 0; i< (int)NetLobbyService.LastValue; i++)
@@ -132,9 +134,69 @@ namespace kartMania_Testing
 			
 			union.byteA = array[0]; union.byteB = array[1];
 			
-			Console.WriteLine("ByteA = {0} , ByteB = {1}, ushort = {2} ", union.byteA, union.byteB, union.intVal);
+			Console.WriteLine("ByteA = {0} , ByteB = {1}, ushort = {2} ", union.byteA, union.byteB, union.shrotVal);
 			
 			Console.ReadKey(true);
 		}
+		
+		public static void ConversionTesting()
+		{
+			byte testLimit = 250;
+			ushort res = 0;
+			
+			Stopwatch  sw = new Stopwatch();
+			
+			// Testing union conversion
+			
+			sw.Start();
+			
+			for(int it = 0; it < 1000; it++)
+				for(byte i = 0; i < testLimit; i++)
+					for(byte j = 0; j < testLimit; j++)
+						res = ConvertBytesUnion(i, j);
+			
+			sw.Stop();
+			
+			Console.WriteLine("Union - Elapsed={0}",sw.Elapsed);
+			
+			
+			// Testing using byte shift
+			
+			sw.Reset();
+			sw.Start();
+			
+			for(int it = 0; it < 1000; it++)
+				for(byte i = 0; i < testLimit; i++)
+					for(byte j = 0; j < testLimit; j++)
+						res = ConvertBytesShift(i, j);
+			
+			sw.Stop();
+			
+			Console.WriteLine("Shift - Elapsed={0}",sw.Elapsed);
+		}
+		//private static ByteUnion union = new ByteUnion();
+		private static ushort ConvertBytesUnion(byte x, byte y)
+        {
+        	ByteUnion union = new ByteUnion();
+        	
+        	union.byteA = x;
+        	union.byteB = y;
+        	
+        	return union.shrotVal;
+        }
+		
+		private static ushort ConvertBytesShift(byte x, byte y)
+		{
+			//ushort rez = (ushort)(((int)x) << 8);
+			
+			ushort rez = x;
+			
+			rez = (ushort)(rez << 8);
+			
+			rez += y;
+			
+			return rez;
+		}
+        
 	}	
 }

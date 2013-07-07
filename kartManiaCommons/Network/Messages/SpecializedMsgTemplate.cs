@@ -23,12 +23,29 @@ namespace kartManiaCommons.Network.Messages
 		#endregion
 		
 		#region Constructors
+		
+		/// <summary>
+		/// Make a new ... avalible for writing.
+		/// </summary>
+		
+		
+		/// <summary>
+		/// Make a new ... avalible for reading.
+		/// </summary>
+		
+		
 		#endregion
 		
 		#region Properties
 		#endregion
 		
 		#region Public Methods
+		
+		public void Build()
+		{
+			//base.Build();
+		}
+		
 		#endregion
 	}
 }

@@ -43,7 +43,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Debug\Logger.cs" />
+    <Compile Include="Network\Messages\GameRoom\LeaveGameRoomMsg.cs" />
+    <Compile Include="Network\Messages\GameRoom\UserSetNameMsg.cs" />
+    <Compile Include="Network\Messages\Lobby\CreateGameRoomMsg.cs" />
+    <Compile Include="Network\Messages\Lobby\GameRoomCreatedMsg.cs" />
+    <Compile Include="Network\Messages\Lobby\GameRoomDestroyedMsg.cs" />
+    <Compile Include="Network\Messages\Lobby\GameRoomPlayerJoinedMsg.cs" />
+    <Compile Include="Network\Messages\Lobby\GameRoomPlayerLeftMsg.cs" />
+    <Compile Include="Network\Messages\Lobby\GameRoomsListMsg.cs" />
+    <Compile Include="Network\Messages\Lobby\GameRoomUpdatePlayersMsg.cs" />
+    <Compile Include="Network\Messages\Lobby\JoinGameRoomFailMsg.cs" />
     <Compile Include="Network\Messages\Lobby\JoinGameRoomMsg.cs" />
+    <Compile Include="Network\Messages\Lobby\JoinGameRoomSuccesMsg.cs" />
     <Compile Include="Network\Messages\Lobby\LobbyChatMsg.cs" />
     <Compile Include="Network\Messages\NetMsg.cs" />
     <Compile Include="Network\Messages\NetMsgException.cs" />
@@ -51,12 +62,16 @@
     <Compile Include="Network\Messages\SpecializedMsgTemplate.cs" />
     <Compile Include="Network\NetConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Structs\GameRoomInfo.cs" />
+    <Compile Include="Structs\PlayerInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Debug" />
     <Folder Include="Network" />
     <Folder Include="Network\Messages" />
     <Folder Include="Network\Messages\Lobby" />
+    <Folder Include="Network\Messages\GameRoom" />
+    <Folder Include="Structs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Notes.txt" />
