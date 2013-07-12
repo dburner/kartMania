@@ -13,9 +13,9 @@ using System.Text;
 using System.Windows.Forms;
 using kartMania.Game;
 using kartMania.Network;
-using kartMania.Structs;
 using kartManiaCommons.Network;
 using kartManiaCommons.Debug;
+using kartManiaCommons.Structs;
 
 namespace kartMania.Forms
 {
@@ -53,7 +53,12 @@ namespace kartMania.Forms
 				}));
 		}
 		
-		public void UpdateGameRoom(uint roomId, byte players)
+		public void CreateGameRoomForm(PlayerInfo[] playerInfoArray, bool isOwner)
+		{
+			// TODO: IMPLEMENT!
+		}
+		
+		public void UpdateGameRoom (uint roomId, byte players)
 		{
 			gameRoomsList.UpdateGameRoom(roomId, players);
 		}

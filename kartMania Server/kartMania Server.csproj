@@ -60,8 +60,6 @@
   <ItemGroup>
     <Compile Include="Network\Clients\NetClient.cs" />
     <Compile Include="Network\Clients\NetPlayer.cs" />
-    <Compile Include="Network\Messages\NetMsg.cs" />
-    <Compile Include="Network\Messages\NetMsgQueue.cs" />
     <Compile Include="Network\Rooms\GameRoom.cs" />
     <Compile Include="Network\Rooms\MainLobby.cs" />
     <Compile Include="Network\Rooms\NetRoom.cs" />

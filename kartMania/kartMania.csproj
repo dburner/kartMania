@@ -86,8 +86,6 @@
     <Compile Include="Game\RenderEngine.cs" />
     <Compile Include="Network\NetClient.cs" />
     <Compile Include="Network\NetManager.cs" />
-    <Compile Include="Network\NetMsg.cs" />
-    <Compile Include="Network\NetMsgQueue.cs" />
     <Compile Include="Physics\Contact.cs" />
     <Compile Include="Physics\PhyisicsConstants.cs" />
     <Compile Include="Physics\PhysicsEngine.cs" />
@@ -98,7 +96,6 @@
     <Compile Include="Physics\Vec2.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Structs\GameRoomInfo.cs" />
     <Compile Include="Video\DrawableBackground.cs" />
     <Compile Include="Video\DrawableBox.cs" />
     <Compile Include="Video\IDrawableBox.cs" />

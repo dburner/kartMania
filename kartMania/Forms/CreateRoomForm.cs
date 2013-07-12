@@ -8,8 +8,9 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+
 using kartMania.Game;
-using kartMania.Structs;
+using kartManiaCommons.Structs;
 
 namespace kartMania.Forms
 {

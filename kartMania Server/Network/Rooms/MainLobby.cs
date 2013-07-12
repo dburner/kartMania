@@ -9,6 +9,7 @@ using System;
 using System.Runtime.CompilerServices;
 using kartManiaCommons.Debug;
 using kartManiaCommons.Network;
+using kartManiaCommons.Network.Messages;
 using kartManiaServer.Structs;
 
 namespace kartManiaServer.Network

@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using kartManiaCommons.Network;
+using kartManiaCommons.Network.Messages;
 using kartManiaServer.Structs;
 
 namespace kartManiaServer.Network

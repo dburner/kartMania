@@ -7,6 +7,7 @@
  */
 using System;
 using System.Collections;
+using kartManiaCommons.Network.Messages;
 
 namespace kartManiaServer.Network
 {

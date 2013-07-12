@@ -9,7 +9,9 @@
 using System;
 using System.IO;
 using System.Net.Sockets;
+
 using kartManiaCommons.Debug;
+using kartManiaCommons.Network.Messages;
 
 namespace kartMania.Network
 {

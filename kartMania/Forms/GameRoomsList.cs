@@ -10,9 +10,10 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+
 using kartMania.Game;
-using kartMania.Structs;
 using kartManiaCommons.Debug;
+using kartManiaCommons.Structs;
 
 namespace kartMania.Forms
 {

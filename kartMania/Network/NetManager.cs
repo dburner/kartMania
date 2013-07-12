@@ -10,6 +10,7 @@ using System.Threading;
 using kartMania.Game;
 using kartManiaCommons.Debug;
 using kartManiaCommons.Network;
+using kartManiaCommons.Network.Messages;
 
 namespace kartMania.Network
 {	
