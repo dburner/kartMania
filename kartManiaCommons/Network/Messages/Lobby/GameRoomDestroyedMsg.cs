@@ -50,7 +50,7 @@ namespace kartManiaCommons.Network.Messages.Lobby
 			:base(service)
 		{
 			mGameRoomId = gameRoomId;
-			Build();
+			//Build();
 		}
 		
 		/// <summary>

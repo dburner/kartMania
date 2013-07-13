@@ -52,24 +52,7 @@ namespace kartManiaServer.Network
 			
 			OnClientRemove(player);
 		}
-		
-		/// <summary>
-		/// Obsolete
-		/// </summary>
-		public virtual void OnTick(double tickDelta)
-		{
-			//get NetMsg from queues and execute OnMessageRec
-			for( int i = 0; i < playersList.Count; i++ )
-			{
-				NetPlayer player = (NetPlayer)playersList[i];				
-				NetMsg    msg    = player.GetNextMessage();
 				
-				if (msg == null) continue;
-				
-				OnMessageReceived(player, msg); //TODO Use ThreadPool to execute this function
-			}
-		}
-		
 		protected void SendMsgToAll(NetMsg msg)
 		{
 			for(int i = 0; i < playersList.Count; i++)

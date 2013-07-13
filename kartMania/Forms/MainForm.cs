@@ -35,6 +35,8 @@ namespace kartMania.Forms
 			CreateRoomForm.FormOpened = false;
 		}
 		
+		#region Public Methods
+		
 		public void PasteChatText(string chatText)
 		{
 			chatBox.Invoke( new MethodInvoker( () => chatBox.Text += chatText + Environment.NewLine) );
@@ -55,7 +57,10 @@ namespace kartMania.Forms
 		
 		public void CreateGameRoomForm(PlayerInfo[] playerInfoArray, bool isOwner)
 		{
-			// TODO: IMPLEMENT!
+			this.Invoke( new MethodInvoker( () => {
+				GameRoomForm form = new GameRoomForm(playerInfoArray, isOwner);
+				form.Show();            	
+				}));
 		}
 		
 		public void UpdateGameRoom (uint roomId, byte players)
@@ -68,6 +73,9 @@ namespace kartMania.Forms
 			gameRoomsList.DestroyGameRoom(roomId);
 		}
 		
+		#endregion
+		
+		#region Private Methods
 		
 		private void ConnectButtonClick   (object sender, EventArgs e)
 		{
@@ -98,6 +106,7 @@ namespace kartMania.Forms
 			}
 		}
 		
+		#endregion
 		
 		private void Button1Click(object sender, EventArgs e)
 		{

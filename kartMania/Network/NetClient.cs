@@ -34,6 +34,7 @@ namespace kartMania.Network
         
 		public NetClient()
 		{
+			 NetMsgQueue.RegisterMsgTypes();
 			 msgQueue   = new NetMsgQueue();
              byteBuffer = new byte[bufferSize];
              connected  = false;

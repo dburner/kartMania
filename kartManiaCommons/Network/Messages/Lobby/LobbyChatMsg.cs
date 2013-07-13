@@ -58,7 +58,7 @@ namespace kartManiaCommons.Network.Messages.Lobby
 		{
 			//streamWriter.Write(chatMessage);
 			mMessage = chatMessage;
-			Build();
+			//Build();
 		}
 		
 		/// <summary>

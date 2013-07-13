@@ -168,8 +168,8 @@ namespace kartManiaCommons.Network.Messages
         	
         	mFirst += length;
         	
-        	NetMsg msg = new NetMsg(service, data);
-        	//NetMsg msg = mNetMsgConstructors[service](data);
+        	//NetMsg msg = new NetMsg(service, data);
+        	NetMsg msg = mNetMsgConstructors[service](data);
         	
         	return msg;
         }

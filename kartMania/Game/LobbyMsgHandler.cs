@@ -11,6 +11,7 @@ using kartMania.Network;
 using kartManiaCommons.Debug;
 using kartManiaCommons.Network;
 using kartManiaCommons.Network.Messages;
+using kartManiaCommons.Network.Messages.Lobby;
 using kartManiaCommons.Structs;
 
 namespace kartMania.Game
@@ -60,46 +61,32 @@ namespace kartMania.Game
 		
 		private static void LobbyChat(NetMsg msg)
 		{
-			string chat = msg.Reader.ReadString();
+			LobbyChatMsg chatMsg = (LobbyChatMsg)msg;
 			
-			MainForm.Instance.PasteChatText(chat);
+			MainForm.Instance.PasteChatText(chatMsg.Message);
 		}
 		
 		private static void GameRoomCreated(NetMsg msg)
 		{
-			GameRoomInfo gri = new GameRoomInfo();
+			GameRoomCreatedMsg gameRoomMsg = (GameRoomCreatedMsg)msg;
 			
-			gri.roomName   = msg.Reader.ReadString();
-			gri.maxPlayers = msg.Reader.ReadByte  ();
-			gri.trackName  = msg.Reader.ReadString();
-			gri.password   = msg.Reader.ReadString();
-			gri.ownerName  = msg.Reader.ReadString();
-			gri.gameRoomId = msg.Reader.ReadUInt32();
-			gri.curPlayers = msg.Reader.ReadByte  ();
-			
-			MainForm.Instance.AddGameRoom(gri);
+			MainForm.Instance.AddGameRoom(gameRoomMsg.GameRoomInfo);
 		}
 		
 		private static void JoinGameRoomSucces(NetMsg msg)
 		{
-			bool     isOwner	  = msg.Reader.ReadBoolean();
-			byte     playersCount = msg.Reader.ReadByte();
-			string[] playerNames  = new string[playersCount];
-			uint[]   playerIds	  = new uint  [playersCount];
-			
-			for(int i = 0; i < playersCount; i++)
-			{
-				playerNames[i] = msg.Reader.ReadString();
-				playerIds  [i] = msg.Reader.ReadUInt32();
-			}
-			
-			MainForm.Instance.CreateGameRoomForm(playerNames, playerIds, isOwner);
+			JoinGameRoomSuccesMsg joinMsg = (JoinGameRoomSuccesMsg)msg;
+				
+			MainForm.Instance.CreateGameRoomForm(joinMsg.PlayersInformation, joinMsg.IsOwner);
+		  //MainForm.Instance.CreateGameRoomForm(playerNames, playerIds, isOwner);
 		}
 		
 		private static void GameRoomPlayerJoined(NetMsg msg)
 		{
-			string playerName = msg.Reader.ReadString();
-			uint   playerId   = msg.Reader.ReadUInt32();
+			GameRoomPlayerJoinedMsg playerJoinedMsg = (GameRoomPlayerJoinedMsg)msg;
+			
+			string playerName = playerJoinedMsg.PlayerName;
+			uint   playerId   = playerJoinedMsg.PlayerId;
 			
 			if (GameRoomForm.FormOpened)
 				GameRoomForm.Instance.AddPlayer(playerName, playerId);
@@ -107,22 +94,26 @@ namespace kartMania.Game
 		
 		private static void GameRoomPlayerLeft(NetMsg msg)
 		{
-			string player = msg.Reader.ReadString();
+			GameRoomPlayerLeftMsg leftMsg = (GameRoomPlayerLeftMsg)msg;
 			
-			GameRoomForm.Instance.RemovePlayer(player);
+			GameRoomForm.Instance.RemovePlayer(leftMsg.PlayerName);
 		}
 		
 		private static void GameRoomUpdatePlayers(NetMsg msg)
-		{
-			uint roomId  = msg.Reader.ReadUInt32();
-			byte players = msg.Reader.ReadByte();
+		{			
+			GameRoomUpdatePlayersMsg updateMsg = (GameRoomUpdatePlayersMsg)msg;
+
+			uint roomId  = updateMsg.GameRoomId;
+			byte players = updateMsg.PlayersCount;
 			
 			MainForm.Instance.UpdateGameRoom(roomId, players);
 		}
 		
 		private static void GameRoomDestroyed(NetMsg msg)
 		{
-			uint roomId = msg.Reader.ReadUInt32();
+			GameRoomDestroyedMsg destroyedMsg = (GameRoomDestroyedMsg)msg;
+			
+			uint roomId = destroyedMsg.GameRoomId;
 			
 			MainForm.Instance.DestroyGameRoom(roomId);
 			
@@ -134,21 +125,11 @@ namespace kartMania.Game
 		
 		private static void GameRoomsList(NetMsg msg)
 		{
-			int roomsCount = msg.Reader.ReadInt32();
+			GameRoomsListMsg roomsMsg = (GameRoomsListMsg)msg;
 			
-			for(int i = 0; i < roomsCount; i++)
+			for (int i = 0; i< roomsMsg.RoomsCount; i++)
 			{
-				GameRoomInfo gri = new GameRoomInfo();
-				
-				gri.roomName   = msg.Reader.ReadString();
-				gri.maxPlayers = msg.Reader.ReadByte  ();
-				gri.trackName  = msg.Reader.ReadString();
-				gri.password   = msg.Reader.ReadString();
-				gri.ownerName  = msg.Reader.ReadString();
-				gri.gameRoomId = msg.Reader.ReadUInt32();
-				gri.curPlayers = msg.Reader.ReadByte  ();
-			
-				MainForm.Instance.AddGameRoom(gri);
+				MainForm.Instance.AddGameRoom(roomsMsg.RoomsInfo[i]);
 			}
 		}
 	}

@@ -10,11 +10,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
 using kartManiaCommons.Debug;
 using kartManiaCommons.Network;
 using kartManiaCommons.Network.Messages;
-using kartManiaServer.Structs;
+using kartManiaCommons.Network.Messages.Lobby;
 
 namespace kartManiaServer.Network
 {
@@ -23,9 +22,9 @@ namespace kartManiaServer.Network
 	/// </summary>
 	public class GameServer:NetServer
 	{
-		private UnnamedLobby 			unnamedLobby;
-		private MainLobby    			mainLobby;
-		private LinkedList<GameRoom>    gameRoomsList;
+		private UnnamedLobby 		 unnamedLobby;
+		private MainLobby    		 mainLobby;
+		private LinkedList<GameRoom> gameRoomsList;
 		 
 		public GameServer()
 		{
@@ -37,6 +36,8 @@ namespace kartManiaServer.Network
 		public override void Start()
 		{
 			base.Start();
+			
+			NetMsgQueue.RegisterMsgTypes();
 			
 			unnamedLobby.OnMoveClientToLobby += new UnnamedLobby.MoveClientToLobbyEventHandler(MovePlayerToLobby);
 			mainLobby.OnCreateGameRoom 	     += new MainLobby.CreateGameRoomEventHandler(PlayerCreateGameRoom);
@@ -90,12 +91,6 @@ namespace kartManiaServer.Network
 			Logger.LogLine("Client connected");
 		}
 		
-		//Derpecated...server is now event driven
-		protected void OnTick(double tickDelta)
-		{
-			
-		}
-		
 		private void PlayerCreateGameRoom(GameRoom gameRoom)
 		{
 			lock(gameRoomsList)
@@ -125,23 +120,9 @@ namespace kartManiaServer.Network
 		
 		private void SendGameRoomsList(NetPlayer player)
 		{
-			ushort service = (ushort)NetLobbyService.GameRoomsList;
-			NetMsg msg = new NetMsg(service);
+			GameRoomsListMsg msg = new GameRoomsListMsg();
 			
-			msg.Writer.Write(gameRoomsList.Count);
-			
-			foreach(GameRoom room in gameRoomsList)
-			{
-				GameRoomInfo gri = room.RoomInfo;
-				
-				msg.Writer.Write(gri.roomName  );
-				msg.Writer.Write(gri.maxPlayers);
-				msg.Writer.Write(gri.trackName );
-				msg.Writer.Write(gri.password  );
-				msg.Writer.Write(gri.ownerName );
-				msg.Writer.Write(gri.gameRoomId);
-				msg.Writer.Write(gri.curPlayers);
-			}
+			msg.RoomsInfo = gameRoomsList.Select( room => room.RoomInfo).ToArray();
 			
 			player.SendMsg(msg);
 		}

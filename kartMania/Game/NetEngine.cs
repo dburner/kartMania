@@ -11,6 +11,8 @@ using kartMania.Network;
 using kartManiaCommons.Debug;
 using kartManiaCommons.Network;
 using kartManiaCommons.Network.Messages;
+using kartManiaCommons.Network.Messages.GameRoom;
+using kartManiaCommons.Network.Messages.Lobby;
 using kartManiaCommons.Structs;
 
 namespace kartMania.Game
@@ -26,22 +28,15 @@ namespace kartMania.Game
 		
 		public void CreateGameRoom(GameRoomInfo gameRoom)
 		{
-			ushort service = (ushort)NetLobbyService.CreateGameRoom;
-			NetMsg msg     = new NetMsg(service);
-			
-			msg.Writer.Write(gameRoom.roomName  );
-			msg.Writer.Write(gameRoom.maxPlayers);
-			msg.Writer.Write(gameRoom.trackName );
-			msg.Writer.Write(gameRoom.password  );
+			CreateGameRoomMsg msg = new CreateGameRoomMsg();
+			msg.GameRoomInfo = gameRoom;
 			
 			SendMsg(msg);
 		}
 		
 		public void SendName(string name)
 		{
-			NetMsg msg = new NetMsg((ushort)NetGameRoomService.UserSetName);
-			
-			msg.Writer.Write(name);
+			UserSetNameMsg msg = new UserSetNameMsg(name);
 			
 			SendMsg(msg);
 		}
@@ -50,10 +45,7 @@ namespace kartMania.Game
 		{
 			if (connected)
 			{
-				ushort service = (ushort)NetLobbyService.LobbyChat;
-				NetMsg msg = new NetMsg(service);
-				
-				msg.Writer.Write(chatText);
+				LobbyChatMsg msg = new LobbyChatMsg(chatText);
 				
 				SendMsg(msg);
 			}
@@ -61,23 +53,21 @@ namespace kartMania.Game
 			{
 				MessageBox.Show("You are not connected to the server", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
-		}	
+		}
 		
 		public void JoinGameRoom(uint gameRoomId, string password)
 		{
-			ushort service = (ushort)NetLobbyService.JoinGameRoom;
-			NetMsg msg = new NetMsg(service);
+			JoinGameRoomMsg msg = new JoinGameRoomMsg();
 			
-			msg.Writer.Write(gameRoomId);
-			msg.Writer.Write(password);
+			msg.GameRoomId 		 = gameRoomId;
+			msg.GameRoomPassword = password;
 			
 			SendMsg(msg);
 		}
 		
 		public void LeaveGameRoom()
 		{
-			ushort service = (ushort)NetGameRoomService.LeaveGameRoom;
-			NetMsg msg = new NetMsg(service);
+			LeaveGameRoomMsg msg = new LeaveGameRoomMsg();
 			
 			SendMsg(msg);
 		}

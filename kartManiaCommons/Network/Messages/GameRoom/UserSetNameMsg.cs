@@ -52,7 +52,7 @@ namespace kartManiaCommons.Network.Messages.GameRoom
 		{
 			//streamWriter.Write(chatMessage);
 			mUserName = userName;
-			Build();
+			//Build();
 		}
 		
 		/// <summary>

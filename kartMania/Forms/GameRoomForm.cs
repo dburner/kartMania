@@ -9,6 +9,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using kartMania.Game;
+using kartManiaCommons.Structs;
 
 namespace kartMania.Forms
 {
@@ -36,6 +37,8 @@ namespace kartMania.Forms
 			
 		private static volatile bool formOpened;
 		
+		#region Constructors
+		
 		public GameRoomForm()
 		{
 			InitializeComponent();
@@ -56,6 +59,22 @@ namespace kartMania.Forms
 			Instance = this;
 		}
 		
+		public GameRoomForm(PlayerInfo[] playerInfoArray, bool isOwner)
+		{
+			InitializeComponent();
+			if (isOwner)
+				EnableControls();
+			
+			AddPlayers(playerInfoArray);
+			
+			FormOpened = true;
+			Instance = this;
+		}
+		
+		#endregion
+		
+		#region Public methods
+		
 		public void SetStatus(string status)
 		{
 			this.Invoke( new MethodInvoker( () => statusLabel.Text = status ) );
@@ -70,6 +89,8 @@ namespace kartMania.Forms
 		{
 			this.Invoke(new MethodInvoker( () => RemovePlayerInvoke(player) ) );
 		}
+		
+		#endregion
 		
 		//TODO RemovePlayer by id not by name
 		private void RemovePlayerInvoke(string player)
@@ -94,7 +115,19 @@ namespace kartMania.Forms
 				item.Tag = playerIds[i];
 				
 				playersListView.Items.Add(item);
+			}
+			
+			playersListView.Sort();
+		}
+		
+		private void AddPlayers(PlayerInfo[] playersInfoArray)
+		{
+			for(int i = 0; i < playersInfoArray.Length; i++)
+			{
+				ListViewItem item = new ListViewItem(playersInfoArray[i].playerName);
+				item.Tag = playersInfoArray[i].playerId;
 				
+				playersListView.Items.Add(item);
 			}
 			
 			playersListView.Sort();

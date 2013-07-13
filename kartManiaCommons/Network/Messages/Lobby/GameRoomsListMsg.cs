@@ -102,6 +102,7 @@ namespace kartManiaCommons.Network.Messages.Lobby
 			base.Build();
 			
 			mRoomsCount = (uint)mRoomsInfo.Length;
+			streamWriter.Write(mRoomsCount);
 			
 			for(uint i = 0; i < mRoomsCount; i++)
 			{

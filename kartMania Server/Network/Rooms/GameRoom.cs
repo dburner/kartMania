@@ -9,7 +9,8 @@ using System;
 using System.Collections;
 using kartManiaCommons.Network;
 using kartManiaCommons.Network.Messages;
-using kartManiaServer.Structs;
+using kartManiaCommons.Network.Messages.Lobby;
+using kartManiaCommons.Structs;
 
 namespace kartManiaServer.Network
 {
@@ -107,43 +108,37 @@ namespace kartManiaServer.Network
 		
 		private void ConfirmPlayerJoin(NetPlayer player)
 		{
-			ushort service = (ushort)NetLobbyService.JoinGameRoomSucces;
-			NetMsg msg = new NetMsg(service);
+			JoinGameRoomSuccesMsg msg = new JoinGameRoomSuccesMsg();
 			
-			bool isOwner = player == owner;
-			
-			msg.Writer.Write(isOwner);    
-			msg.Writer.Write((byte)playersList.Count);
+			msg.IsOwner = player == owner;
+			msg.PlayersInformation = new PlayerInfo[playersList.Count];
 			
 			for(int i = 0; i < playersList.Count; i++)
 			{
 				NetPlayer otherPlayer = (NetPlayer)playersList[i];
+				PlayerInfo info = new PlayerInfo();
 				
-				msg.Writer.Write(otherPlayer.Name);
-				msg.Writer.Write(otherPlayer.PlayerId);
+				info.playerName = otherPlayer.Name;
+				info.playerId   = otherPlayer.PlayerId;
+				
+				msg.PlayersInformation[i] = info;
 			}
 			
 			player.SendMsg(msg);
-		}
+		}		
 		
 		private void NotifyPlayerJoined(NetPlayer player)
 		{
-			ushort service = (ushort)NetLobbyService.GameRoomPlayerJoined;
-			NetMsg msg = new NetMsg(service);
-			
-			msg.Writer.Write(player.Name);
-			msg.Writer.Write(player.PlayerId);
+			GameRoomPlayerJoinedMsg msg =
+				new GameRoomPlayerJoinedMsg(player.PlayerId, player.Name);
 			
 			SendMsgToAllExcept(msg, player);
 		}
 		
 		private void NotifyPlayerLeft(NetPlayer player)
 		{
-			ushort service = (ushort)NetLobbyService.GameRoomPlayerLeft;
-			NetMsg msg = new NetMsg(service);
-			
-			msg.Writer.Write(player.Name);
-			msg.Writer.Write(player.PlayerId);
+			GameRoomPlayerLeftMsg msg =
+				new GameRoomPlayerLeftMsg(player.PlayerId, player.Name);
 			
 			SendMsgToAll(msg);
 		}

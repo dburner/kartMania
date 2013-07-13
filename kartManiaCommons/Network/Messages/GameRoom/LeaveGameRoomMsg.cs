@@ -14,7 +14,7 @@ namespace kartManiaCommons.Network.Messages.GameRoom
 	/// </summary>
 	public class LeaveGameRoomMsg:NetMsg
 	{
-		private const ushort service = (ushort)NetLobbyService.LobbyChat;
+		private const ushort service = (ushort)NetGameRoomService.LeaveGameRoom;
 		
 		#region Factory Registration
 		

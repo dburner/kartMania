@@ -8,6 +8,7 @@
 using System;
 using kartManiaCommons.Network;
 using kartManiaCommons.Network.Messages;
+using kartManiaCommons.Network.Messages.GameRoom;
 
 namespace kartManiaServer.Network
 {
@@ -43,7 +44,8 @@ namespace kartManiaServer.Network
 		{
 			if ( msg.Service == (ushort)NetGameRoomService.UserSetName )
 			{
-				player.Name = msg.Reader.ReadString();
+				UserSetNameMsg setNameMsg = msg as UserSetNameMsg;
+				player.Name = setNameMsg.UserName;
 				if ( OnMoveClientToLobby != null)
 					OnMoveClientToLobby(player);
 				

@@ -71,8 +71,14 @@ namespace kartManiaCommons.Network.Messages
 		
 		#region Public Methods
 		
+		/// <summary>
+		/// Gets the data from the message. Also if the message is not build it builds it.
+		/// </summary>
 		public byte[] GetData()
 		{
+			if (mMsgMode != MsgMode.Build)
+				Build();
+			
 			mLenght = (ushort)(dataStream.Length);
 			
 			byte[] byteBuffer = new byte[mLenght + 4];
@@ -93,17 +99,13 @@ namespace kartManiaCommons.Network.Messages
 			return byteBuffer;
 		}
 		
-		public void Dispose()
-		{
-			dataStream.Dispose();
-		}
-		
-		
 		/// <summary>
 		/// Writes all the data to the buffer and ends the writing mode.
 		/// </summary>
 		public virtual void Build()
 		{
+			if (mMsgMode == MsgMode.Build)
+				return;
 			if (mMsgMode == MsgMode.WritingMode)
 			{
 				// Set the message mode to BuildMode
@@ -114,6 +116,11 @@ namespace kartManiaCommons.Network.Messages
 			{
 				throw new NetMsgException("Message is not in writing mode");
 			}
+		}
+		
+		public void Dispose()
+		{
+			dataStream.Dispose();
 		}
 		
 		#endregion 
@@ -133,8 +140,8 @@ namespace kartManiaCommons.Network.Messages
 		public ushort Service { get { return mService; } }
 		public ushort Length  { get { return mLenght;  } }
 		
-		public BinaryReader Reader { get { return streamReader; } } //TODO throw exception if in writing mode
-		public BinaryWriter Writer { get { return streamWriter; } } //TODO throw exception if in reading mode
+		//private BinaryReader Reader { get { return streamReader; } } //TODO throw exception if in writing mode
+		//private BinaryWriter Writer { get { return streamWriter; } } //TODO throw exception if in reading mode
 		
 		#endregion
 		
@@ -144,7 +151,7 @@ namespace kartManiaCommons.Network.Messages
 		{
 			ReadingMode = 0,
 			WritingMode = 1,
-			Build       = 2  //Redundant???
+			Build       = 2
 		}
         
 		

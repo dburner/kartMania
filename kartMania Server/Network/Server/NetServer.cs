@@ -64,6 +64,8 @@ namespace kartManiaServer.Network
 			
 		}
 		
+		#endregion
+		
 		#region Callbacks
 		
 		private void AcceptCallback(IAsyncResult result)
@@ -89,8 +91,6 @@ namespace kartManiaServer.Network
 	             Logger.LogLine("Exception: " + e.ToString());
 	        }
     	}
-		
-		#endregion
 		
 		#endregion
 	}

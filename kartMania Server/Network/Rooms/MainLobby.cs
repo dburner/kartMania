@@ -10,7 +10,8 @@ using System.Runtime.CompilerServices;
 using kartManiaCommons.Debug;
 using kartManiaCommons.Network;
 using kartManiaCommons.Network.Messages;
-using kartManiaServer.Structs;
+using kartManiaCommons.Network.Messages.Lobby;
+using kartManiaCommons.Structs;
 
 namespace kartManiaServer.Network
 {
@@ -59,17 +60,20 @@ namespace kartManiaServer.Network
 		
 		private void SendChatMessage(NetPlayer player, NetMsg msg)
 		{
-			NetMsg sendMsg = new NetMsg(msg.Service); //NetLobbyChatservice
+			LobbyChatMsg recvMsg = (LobbyChatMsg)msg;
+			LobbyChatMsg sendMsg = new LobbyChatMsg();
 			
-			string chat = "[" + player.Name + "]: " + msg.Reader.ReadString();
+			string chat = "[" + player.Name + "]: " + recvMsg.Message;
 			
-			sendMsg.Writer.Write(chat);
+			sendMsg.Message = chat;
+			
 			SendMsgToAll(sendMsg);
 		}
 		
 		private void JoinGameRoom   (NetPlayer player, NetMsg msg)
 		{
-			uint gameRoomId = msg.Reader.ReadUInt32();
+			JoinGameRoomMsg joinMsg = (JoinGameRoomMsg)msg;
+			uint gameRoomId = joinMsg.GameRoomId;
 			
 			if (player.JoinedRoom == null) //TODO comment or uncomment this EDIT: WTF???
 				OnPlayerJoinGameRoom(player, gameRoomId);
@@ -77,18 +81,15 @@ namespace kartManiaServer.Network
 		
 		private void CreateGameRoom (NetPlayer player, NetMsg msg)
 		{
-			GameRoomInfo gri = new GameRoomInfo();
-			
-			gri.roomName   = msg.Reader.ReadString();
-			gri.maxPlayers = msg.Reader.ReadByte  ();
-			gri.trackName  = msg.Reader.ReadString();
-			gri.password   = msg.Reader.ReadString();
+			CreateGameRoomMsg createRoomMsg = (CreateGameRoomMsg)msg;
 					
-			GameRoom gameRoom = new GameRoom(player, gri);
+			GameRoom gameRoom = new GameRoom(player, createRoomMsg.GameRoomInfo);
 			
 			gameRoom.OnPlayerJoin 		+= new GameRoom.OnGameRoomPlayersJoinLeave   (gameRoom_OnPlayerJoin);
 			gameRoom.OnPlayerLeft 		+= new GameRoom.OnGameRoomPlayersJoinLeave	 (gameRoom_OnPlayerLeft);
 			gameRoom.OnGameRoomDestroy 	+= new GameRoom.OnGameRoomDestroyEventHandler(gameRoom_OnGameRoomDestroy);
+			
+			GameRoomInfo gri = createRoomMsg.GameRoomInfo;
 			
 			gri.ownerName  = player.Name;
 			gri.gameRoomId = gameRoom.RoomId;
@@ -103,48 +104,37 @@ namespace kartManiaServer.Network
 		
 		private void NotifyGameRoomCreated(GameRoomInfo gri)
 		{
-			ushort service = (ushort)NetLobbyService.GameRoomCreated;
-			NetMsg msg 	   = new NetMsg(service);
-			
-			msg.Writer.Write(gri.roomName  );
-			msg.Writer.Write(gri.maxPlayers);
-			msg.Writer.Write(gri.trackName );
-			msg.Writer.Write(gri.password  );
-			msg.Writer.Write(gri.ownerName );
-			msg.Writer.Write(gri.gameRoomId);
-			msg.Writer.Write(gri.curPlayers);
+			GameRoomCreatedMsg msg = new GameRoomCreatedMsg();
+			msg.GameRoomInfo = gri;
 			
 			SendMsgToAll(msg);
 		}
 		
 		private void gameRoom_OnPlayerJoin(GameRoom gameRoom)
 		{
-			ushort service = (ushort)NetLobbyService.GameRoomUpdatePlayers;
-			NetMsg msg = new NetMsg(service);
+			GameRoomUpdatePlayersMsg msg = new GameRoomUpdatePlayersMsg();
 			
-			msg.Writer.Write(gameRoom.RoomId);
-			msg.Writer.Write(gameRoom.PlayersCount);
+			msg.GameRoomId   = gameRoom.RoomId;
+			msg.PlayersCount = (byte)gameRoom.PlayersCount;
 			
 			SendMsgToAll(msg);
 		}
 		
 		private void gameRoom_OnPlayerLeft(GameRoom gameRoom)
 		{
-			ushort service = (ushort)NetLobbyService.GameRoomUpdatePlayers;
-			NetMsg msg = new NetMsg(service);
+			GameRoomUpdatePlayersMsg msg = new GameRoomUpdatePlayersMsg();
 			
-			msg.Writer.Write(gameRoom.RoomId);
-			msg.Writer.Write(gameRoom.PlayersCount);
+			msg.GameRoomId   = gameRoom.RoomId;
+			msg.PlayersCount = (byte)gameRoom.PlayersCount;
 			
 			SendMsgToAll(msg);
 		}
 		
 		private void gameRoom_OnGameRoomDestroy(GameRoom gameRoom)
 		{
-			ushort service = (ushort)NetLobbyService.GameRoomDestroyed;
-			NetMsg msg = new NetMsg(service);
+			GameRoomDestroyedMsg msg = new GameRoomDestroyedMsg();
 			
-			msg.Writer.Write(gameRoom.RoomId);
+			msg.GameRoomId = gameRoom.RoomId;
 			
 			SendMsgToAll(msg);
 		}

@@ -55,7 +55,7 @@ namespace kartManiaCommons.Network.Messages.Lobby
 			mGameRoomId   = gameRoomId;
 			mPlayersCount = playersCount;
 			
-			Build();
+			//Build();
 		}
 		
 		/// <summary>

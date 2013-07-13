@@ -53,7 +53,7 @@ namespace kartManiaCommons.Network.Messages.Lobby
 			mPlayerId   = playerId;
 			mPlayerName = playerName;
 			
-			Build();
+			//Build();
 		}
 		
 		/// <summary>
