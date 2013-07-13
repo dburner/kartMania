@@ -7,6 +7,7 @@
  */
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using kartManiaCommons.Network.Messages;
 
 namespace kartManiaServer.Network
@@ -20,14 +21,14 @@ namespace kartManiaServer.Network
 		
 		private uint idNumber;
 		
-		protected volatile ArrayList playersList; //volatile
+		protected volatile LinkedList<NetPlayer> playersList;
 		
 		public uint RoomId { get { return idNumber; } }
 		
 		public NetRoom()
 		{
 			idNumber    = uniqueId++;
-			playersList = new ArrayList();
+			playersList = new LinkedList<NetPlayer>();
 		}
 		
 		public void AddPlayer(NetPlayer player)
@@ -35,7 +36,7 @@ namespace kartManiaServer.Network
 			lock(playersList)
 			{
 				if (!playersList.Contains(player))
-					playersList.Add(player);
+					playersList.AddLast(player);
 			}
 			
 			player.ClientDisconnect += new ClientDisconnectEventHandler(OnClientDisconnect);
@@ -55,20 +56,16 @@ namespace kartManiaServer.Network
 				
 		protected void SendMsgToAll(NetMsg msg)
 		{
-			for(int i = 0; i < playersList.Count; i++)
+			foreach(NetPlayer player in playersList)
 			{
-				NetPlayer player = (NetPlayer)playersList[i];
-				
 				player.SendMsg(msg);
 			}
 		}
 		
 		protected void SendMsgToAllExcept(NetMsg msg, NetPlayer player)
 		{
-			for(int i = 0; i < playersList.Count; i++)
+			foreach(NetPlayer otherPlayer in playersList)
 			{
-				NetPlayer otherPlayer = (NetPlayer)playersList[i];
-				
 				if (otherPlayer != player)
 					otherPlayer.SendMsg(msg);
 			}

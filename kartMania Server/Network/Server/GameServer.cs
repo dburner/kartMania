@@ -31,13 +31,13 @@ namespace kartManiaServer.Network
 			unnamedLobby  = new UnnamedLobby();
 			mainLobby	  = new MainLobby();
 			gameRoomsList = new LinkedList<GameRoom>();
+			
+			NetMsgQueue.RegisterMsgTypes();
 		}
 		
 		public override void Start()
 		{
 			base.Start();
-			
-			NetMsgQueue.RegisterMsgTypes();
 			
 			unnamedLobby.OnMoveClientToLobby += new UnnamedLobby.MoveClientToLobbyEventHandler(MovePlayerToLobby);
 			mainLobby.OnCreateGameRoom 	     += new MainLobby.CreateGameRoomEventHandler(PlayerCreateGameRoom);
@@ -96,7 +96,7 @@ namespace kartManiaServer.Network
 			lock(gameRoomsList)
 				gameRoomsList.AddLast(gameRoom);
 			
-			gameRoom.OnGameRoomDestroy += new GameRoom.OnGameRoomDestroyEventHandler(DestroyGameRoom);
+			gameRoom.GameRoomDestroyed += new GameRoom.GameRoomDestroyedEventHandler(DestroyGameRoom);
 		}
 		
 		private void JoinGameRoom(NetPlayer player, uint gameRoomId)

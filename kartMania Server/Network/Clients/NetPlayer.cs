@@ -42,11 +42,6 @@ namespace kartManiaServer.Network
 			idNumber = uniqueId++;
 		}
 		
-		public NetMsg GetNextMessage()
-		{
-			return msgQueue.DequeueAsNetMsg();
-		}
-		
 //		public new void SendMsg(NetMsg msg)
 //		{
 //			Logger.LogLine("Send to: " + Name + " " + msg.Service.ToString());
@@ -72,7 +67,7 @@ namespace kartManiaServer.Network
 				ThreadPool.QueueUserWorkItem( s => OnMessageReceived(msg) );
 		}
 		
-		protected void OnMessageReceived(NetMsg msg)
+		protected virtual  void OnMessageReceived(NetMsg msg)
 		{
 			Logger.LogLine(Name + " " + msg.Service, Logger.ServerLogLevel.Subtle);
 			

@@ -32,12 +32,12 @@ namespace kartManiaServer.Network
 		// TODO rewrite all delegates as
 		// GameRoomEventHandler(GameRoom sender, GameRoomEventArgs)
 		
-		public delegate void OnGameRoomDestroyEventHandler(GameRoom gameRoom);
-		public event 		 OnGameRoomDestroyEventHandler OnGameRoomDestroy;
+		public delegate void GameRoomDestroyedEventHandler(GameRoom gameRoom);
+		public event 		 GameRoomDestroyedEventHandler GameRoomDestroyed;
 		
 		public delegate void OnGameRoomPlayersJoinLeave(GameRoom gameRoom);
-		public event 		 OnGameRoomPlayersJoinLeave OnPlayerJoin;
-		public event 		 OnGameRoomPlayersJoinLeave OnPlayerLeft;
+		public event 		 OnGameRoomPlayersJoinLeave PlayerJoined;
+		public event 		 OnGameRoomPlayersJoinLeave PlayerLeft;
 		
 		public GameRoomInfo RoomInfo     { get; set; }
 		public int 			PlayersCount { get { return playersList.Count; } }
@@ -65,8 +65,8 @@ namespace kartManiaServer.Network
 			ConfirmPlayerJoin(client);
 			NotifyPlayerJoined(client);
 			
-			if (OnPlayerJoin != null)
-				OnPlayerJoin(this);
+			if (PlayerJoined != null)
+				PlayerJoined(this);
 		}
 		
 		protected override void OnClientRemove(NetPlayer client)
@@ -74,7 +74,6 @@ namespace kartManiaServer.Network
 			base.OnClientRemove(client);
 			
 			client.NewGameRoomMsg -= new NewRoomMsgEventHandler(OnMessageReceived);
-			
 			client.JoinedRoom = null;
 			
 			if (client == owner)
@@ -82,8 +81,8 @@ namespace kartManiaServer.Network
 			else
 			{
 				NotifyPlayerLeft(client);
-				if (OnPlayerLeft != null)
-					OnPlayerLeft(this);
+				if (PlayerLeft != null)
+					PlayerLeft(this);
 			}		
 		}
 		
@@ -102,26 +101,27 @@ namespace kartManiaServer.Network
 		
 		private void DestroyGameRoom()
 		{
-			
-			OnGameRoomDestroy(this);
+			if (GameRoomDestroyed != null)
+				GameRoomDestroyed(this);
 		}
 		
-		private void ConfirmPlayerJoin(NetPlayer player)
+		private void ConfirmPlayerJoin (NetPlayer player)
 		{
 			JoinGameRoomSuccesMsg msg = new JoinGameRoomSuccesMsg();
 			
 			msg.IsOwner = player == owner;
 			msg.PlayersInformation = new PlayerInfo[playersList.Count];
 			
-			for(int i = 0; i < playersList.Count; i++)
+			int count = 0;
+			
+			foreach(NetPlayer otherPlayer in playersList)
 			{
-				NetPlayer otherPlayer = (NetPlayer)playersList[i];
 				PlayerInfo info = new PlayerInfo();
 				
 				info.playerName = otherPlayer.Name;
 				info.playerId   = otherPlayer.PlayerId;
 				
-				msg.PlayersInformation[i] = info;
+				msg.PlayersInformation[count++] = info;
 			}
 			
 			player.SendMsg(msg);
@@ -135,7 +135,7 @@ namespace kartManiaServer.Network
 			SendMsgToAllExcept(msg, player);
 		}
 		
-		private void NotifyPlayerLeft(NetPlayer player)
+		private void NotifyPlayerLeft  (NetPlayer player)
 		{
 			GameRoomPlayerLeftMsg msg =
 				new GameRoomPlayerLeftMsg(player.PlayerId, player.Name);
@@ -148,9 +148,8 @@ namespace kartManiaServer.Network
 		
 		public void PrintPlayers()
 		{
-			for(int i = 0; i < playersList.Count; i++)
+			foreach(NetPlayer player in playersList)
 			{
-				NetPlayer player = (NetPlayer)playersList[i];
 				Console.WriteLine(player.Name);
 			}
 		}

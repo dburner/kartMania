@@ -72,7 +72,6 @@
   <ItemGroup>
     <Folder Include="Network" />
     <Folder Include="Network\Clients" />
-    <Folder Include="Network\Messages" />
     <Folder Include="Network\Server" />
     <Folder Include="Network\Rooms" />
     <Folder Include="Structs" />
