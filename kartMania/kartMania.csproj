@@ -81,9 +81,10 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Game\LobbyMsgHandler.cs" />
+    <Compile Include="Game\NetEngine.cs" />
     <Compile Include="Game\GameCar.cs" />
+    <Compile Include="Game\RenderEngine.cs" />
     <Compile Include="Network\NetClient.cs" />
-    <Compile Include="Network\NetEngine.cs" />
     <Compile Include="Network\NetManager.cs" />
     <Compile Include="Physics\Contact.cs" />
     <Compile Include="Physics\PhyisicsConstants.cs" />
@@ -98,7 +99,6 @@
     <Compile Include="Video\DrawableBackground.cs" />
     <Compile Include="Video\DrawableBox.cs" />
     <Compile Include="Video\IDrawableBox.cs" />
-    <Compile Include="Video\RenderEngine.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\CreateRoomForm.resx">

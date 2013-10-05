@@ -9,7 +9,6 @@ using System;
 using System.Threading;
 using kartMania.Forms;
 using kartMania.Network;
-using kartMania.Video;
 
 namespace kartMania.Game
 {
