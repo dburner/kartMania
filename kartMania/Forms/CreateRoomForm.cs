@@ -19,14 +19,14 @@ namespace kartMania.Forms
 	/// </summary>
 	public partial class CreateRoomForm : Form
 	{
-		public static bool FormOpened { get; set; }
-		public static CreateRoomForm Instance { get; set; }
+		public static bool 			 FormOpened { get; set; }
+		public static CreateRoomForm Instance 	{ get; set; }
 		
 		public CreateRoomForm()
 		{
 			InitializeComponent();
 			
-			Instance = this;
+			Instance   = this;
 			FormOpened = true;
 			
 			trackComboBox.SelectedIndex = 0;
