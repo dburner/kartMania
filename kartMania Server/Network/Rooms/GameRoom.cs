@@ -52,7 +52,7 @@ namespace kartManiaServer.Network
 			RoomInfo = roomInfo;
 			AddPlayer(owner);
 			
-			//TODO Override constructorul de baza din netroom cu numarul corect de jucatori 
+			//TODO Overload constructorul de baza din netroom cu numarul corect de jucatori 
 		}
 		
 		protected override void OnClientConnect(NetPlayer client)

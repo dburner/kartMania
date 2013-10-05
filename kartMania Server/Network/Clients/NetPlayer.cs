@@ -63,8 +63,8 @@ namespace kartManiaServer.Network
 			NetMsg msg = msgQueue.DequeueAsNetMsg();
 			
 			if (msg != null)
-				//OnMessageReceived(msg);
-				ThreadPool.QueueUserWorkItem( s => OnMessageReceived(msg) );
+				OnMessageReceived(msg);
+				//ThreadPool.QueueUserWorkItem( s => OnMessageReceived(msg) );
 		}
 		
 		protected virtual  void OnMessageReceived(NetMsg msg)
