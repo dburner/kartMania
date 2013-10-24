@@ -6,8 +6,10 @@
  * 
  */
 using System;
+using System.Collections.Generic;
 using kartMania.Forms;
 using kartMania.Network;
+using kartMania.Exceptions;
 using kartManiaCommons.Debug;
 using kartManiaCommons.Network;
 using kartManiaCommons.Network.Messages;
@@ -21,42 +23,38 @@ namespace kartMania.Game
 	/// </summary>
 	public static class LobbyMsgHandler
 	{
+		private delegate void MessageHandler(NetMsg msg);
+		
+		private static Dictionary<NetLobbyService, MessageHandler> m_messageHandlers;
+		
+		static LobbyMsgHandler()
+		{
+			m_messageHandlers = new Dictionary<NetLobbyService, LobbyMsgHandler.MessageHandler>();
+			
+			m_messageHandlers.Add(NetLobbyService.LobbyChat,             LobbyChat            );
+			m_messageHandlers.Add(NetLobbyService.GameRoomCreated,       GameRoomCreated      );
+			m_messageHandlers.Add(NetLobbyService.JoinGameRoomSucces,    JoinGameRoomSucces   );
+			m_messageHandlers.Add(NetLobbyService.GameRoomPlayerJoined,  GameRoomPlayerJoined );
+			m_messageHandlers.Add(NetLobbyService.GameRoomPlayerLeft,    GameRoomPlayerLeft   );
+			m_messageHandlers.Add(NetLobbyService.GameRoomUpdatePlayers, GameRoomUpdatePlayers);
+			m_messageHandlers.Add(NetLobbyService.GameRoomDestroyed,     GameRoomDestroyed    );
+			m_messageHandlers.Add(NetLobbyService.GameRoomsList,         GameRoomsList        );
+		}
+		
 		public static void HandleMsg(NetMsg msg)
 		{
 			//TODO Use delegates array for all this
 			NetLobbyService service = (NetLobbyService)msg.Service;
 			Logger.LogLine(service.ToString());
-			switch (service)
+			
+			if (m_messageHandlers.ContainsKey(service))
 			{
-				case NetLobbyService.LobbyChat:
-					LobbyChat(msg);
-					break;
-				case NetLobbyService.GameRoomCreated:
-					GameRoomCreated(msg);
-					break;
-				case NetLobbyService.JoinGameRoomSucces:
-					JoinGameRoomSucces(msg);
-					break;
-				case NetLobbyService.JoinGameRoomFail:
-					break;
-				case NetLobbyService.GameRoomPlayerJoined:
-					GameRoomPlayerJoined(msg);
-					break;
-				case NetLobbyService.GameRoomPlayerLeft:
-					GameRoomPlayerLeft(msg);
-					break;
-				case NetLobbyService.GameRoomUpdatePlayers:
-					GameRoomUpdatePlayers(msg);
-					break;
-				case NetLobbyService.GameRoomDestroyed:
-					GameRoomDestroyed(msg);
-					break;
-				case NetLobbyService.GameRoomsList:
-					GameRoomsList(msg);
-					break;
-				//default:
-				//	break;
+				m_messageHandlers[service](msg);
 			}
+			else
+			{
+				throw new NoHandlerException();
+			}		
 		}
 		
 		private static void LobbyChat(NetMsg msg)

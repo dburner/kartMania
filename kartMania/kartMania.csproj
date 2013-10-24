@@ -43,6 +43,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -53,12 +55,26 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\NoHandlerException.cs" />
+    <Compile Include="FormsWPF\Controls\GameRoomsList.xaml.cs">
+      <DependentUpon>GameRoomsList.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FormsWPF\Controls\GameRoomViewModel.cs" />
+    <Compile Include="FormsWPF\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Forms\GameForm.cs" />
     <Compile Include="Forms\GameForm.Designer.cs">
       <DependentUpon>GameForm.cs</DependentUpon>
@@ -81,9 +97,10 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Game\LobbyMsgHandler.cs" />
-    <Compile Include="Game\NetEngine.cs" />
     <Compile Include="Game\GameCar.cs" />
+    <Compile Include="Game\NetEngine.cs" />
     <Compile Include="Game\RenderEngine.cs" />
+    <Compile Include="Models\GameRoom.cs" />
     <Compile Include="Network\NetClient.cs" />
     <Compile Include="Network\NetManager.cs" />
     <Compile Include="Physics\Contact.cs" />
@@ -119,13 +136,17 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Forms" />
+    <Folder Include="FormsWPF" />
+    <Folder Include="FormsWPF\Controls" />
     <Folder Include="Network" />
     <Folder Include="Game" />
     <Folder Include="Images" />
+    <Folder Include="Exceptions" />
     <Folder Include="Physics\Shapes" />
+    <Folder Include="Models" />
     <Folder Include="Video" />
     <Folder Include="Physics" />
-    <Folder Include="Structs" />
+    <Folder Include="Models" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\C# Downloads\SharpGL\Core\SharpGL.SceneGraph\SharpGL.SceneGraph.csproj">
@@ -163,6 +184,10 @@
     <None Include="Images\Track11.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="FormsWPF\Controls\GameRoomsList.xaml" />
+    <Page Include="FormsWPF\MainWindow.xaml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>

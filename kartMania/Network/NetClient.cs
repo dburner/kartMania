@@ -7,9 +7,9 @@
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net.Sockets;
-
 using kartManiaCommons.Debug;
 using kartManiaCommons.Network.Messages;
 
@@ -132,7 +132,7 @@ namespace kartMania.Network
 					Disconnect();
 				}
 			}
-			catch(Exception e)
+			catch(Exception e) // TODO:Implement corect catch with specific exceptions
 			{
 				Logger.LogLine(e.ToString());
 				Disconnect();

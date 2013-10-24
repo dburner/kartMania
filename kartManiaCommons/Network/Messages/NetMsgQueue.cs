@@ -173,6 +173,11 @@ namespace kartManiaCommons.Network.Messages
         	
         	return msg;
         }
+        
+        public override string ToString()
+        {
+        	return UsedSpace + " bytes used in queue.";
+        }
 
         #endregion
 

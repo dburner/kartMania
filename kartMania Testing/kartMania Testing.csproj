@@ -53,6 +53,8 @@
     <ProjectReference Include="..\kartManiaCommons\kartManiaCommons.csproj">
       <Project>{A9F40E1E-378B-44CF-8A58-21243A6DF539}</Project>
       <Name>kartManiaCommons</Name>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
