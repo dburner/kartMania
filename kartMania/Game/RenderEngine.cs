@@ -21,22 +21,22 @@ namespace kartMania.Game
 	{
 		public const int Width = 1200;
 		public const int Height = 675;
-		private ArrayList playerObjects;
-		private DrawableBackground backGround;
+		
+		private ArrayList m_playerObjects;
+		private DrawableBackground m_backGround;
 		private OpenGL gl;
 		
 		public RenderEngine(int players)
 		{
-			playerObjects = new ArrayList(players);
-			
+			m_playerObjects = new ArrayList(players);
 		}
 		
 		public void setGl(OpenGL opengl)
 		{
 			gl = opengl;
 			
-			backGround = new DrawableBackground();
-			backGround.Init(gl, "Images\\Track1.bmp");
+			m_backGround = new DrawableBackground();
+			m_backGround.Init(gl, "Images\\Track1.bmp");
 			
 			DrawableBox box = new DrawableBox(new Vec2(167, 112), 175, 84);
 			
@@ -44,7 +44,7 @@ namespace kartMania.Game
 			box.Init(gl, "Images\\Car_01.png");
 			box.Scale(0.5);
 			box.Rotate(Math.PI*1.2);
-			playerObjects.Add(box);
+			m_playerObjects.Add(box);
 			
 			//box = new DrawableBox(new Vec2(167, 112), 175, 84);
 			//box.Init(gl, "Images\\Car_01.png");
@@ -54,7 +54,7 @@ namespace kartMania.Game
 		
 		public void Render(int width, int height)
 		{
-			width = Width;
+			width  = Width;
 			height = Height;
 			gl.MatrixMode(OpenGL.GL_PROJECTION);
 			gl.LoadIdentity();
@@ -68,10 +68,11 @@ namespace kartMania.Game
 			gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT);
 			
 			
-			backGround.Draw();
-			foreach(DrawableBox box in playerObjects)
+			m_backGround.Draw();
+			foreach(DrawableBox box in m_playerObjects)
 			{
 				box.Draw();
+				box.Rotate(Math.PI/180);
 				//box.Rotate(Math.PI/100);
 				//box.Translate(new Vec2(2,0));
 			}

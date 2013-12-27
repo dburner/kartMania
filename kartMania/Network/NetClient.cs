@@ -20,24 +20,24 @@ namespace kartMania.Network
 	/// </summary>
 	public class NetClient
 	{        
-        private Socket      client;
+        private Socket      m_client;
         
-        private const int   bufferSize = 1024;
-        private byte[]      byteBuffer;
+        private const int   m_bufferSize = 1024;
+        private byte[]      m_byteBuffer;
         
-        protected NetMsgQueue msgQueue;
-        protected bool		  connected;
+        protected NetMsgQueue m_msgQueue;
+        protected bool		  m_connected;
         
-        public bool Connected { get { return connected; } }
+        public bool Connected { get { return m_connected; } }
         
         #region Constructors
         
 		public NetClient()
 		{
 			 NetMsgQueue.RegisterMsgTypes();
-			 msgQueue   = new NetMsgQueue();
-             byteBuffer = new byte[bufferSize];
-             connected  = false;
+			 m_msgQueue   = new NetMsgQueue();
+             m_byteBuffer = new byte[m_bufferSize];
+             m_connected  = false;
 		}
 		
 		#endregion
@@ -48,16 +48,16 @@ namespace kartMania.Network
         {
             try
             {
-            	client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp); 
+            	m_client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp); 
             	
-            	client.Connect(host, port);             
-                client.BeginReceive(byteBuffer, 0, 1024, SocketFlags.None, new AsyncCallback(ReceiveCallback), null);
+            	m_client.Connect(host, port);             
+                m_client.BeginReceive(m_byteBuffer, 0, 1024, SocketFlags.None, new AsyncCallback(ReceiveCallback), null);
                 
-               	connected = true;
+               	m_connected = true;
             }
             catch(Exception e)
             {
-            	connected = false;
+            	m_connected = false;
             	Logger.LogLine(e.ToString());
             }
         }	
@@ -65,11 +65,11 @@ namespace kartMania.Network
 		public virtual void Disconnect()
 		{
 			// Close = Disconnect + Dispose
-			if (client != null)
-				client.Close();
+			if (m_client != null)
+				m_client.Close();
 			//client.Disconnect(false);
 			//client.Dispose();
-		 	connected = false;
+		 	m_connected = false;
 			//msgQueue.Dispose();
 		}
 		
@@ -92,7 +92,7 @@ namespace kartMania.Network
 			try
 			{
 				byte[] data = msg.GetData();
-				client.BeginSend(data, 0, data.Length, SocketFlags.None, new AsyncCallback(SendCallback), null);
+				m_client.BeginSend(data, 0, data.Length, SocketFlags.None, new AsyncCallback(SendCallback), null);
 			}
 			catch(SocketException e)
 			{
@@ -116,15 +116,15 @@ namespace kartMania.Network
 			{
 				int bytesRead;			
 				
-				bytesRead = client.EndReceive(ar);
+				bytesRead = m_client.EndReceive(ar);
 				if (bytesRead > 0)
 				{
-					lock(msgQueue)
-						msgQueue.Enqueue(byteBuffer, bytesRead);
+					lock(m_msgQueue)
+						m_msgQueue.Enqueue(m_byteBuffer, bytesRead);
 					//Logger.LogLine(msgQueue.DequeueAsString());
 					OnDataReceived();
 					
-					client.BeginReceive(byteBuffer, 0, bufferSize, SocketFlags.None, new AsyncCallback(ReceiveCallback), null);
+					m_client.BeginReceive(m_byteBuffer, 0, m_bufferSize, SocketFlags.None, new AsyncCallback(ReceiveCallback), null);
 				}
 				else
 				{
@@ -145,7 +145,7 @@ namespace kartMania.Network
         	try 
         	{
             	//int bytesSent = client.EndSend(ar);
-            	client.EndSend(ar);
+            	m_client.EndSend(ar);
 
         	} catch (Exception e) 
         	{

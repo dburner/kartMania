@@ -43,7 +43,7 @@ namespace kartMania.Game
 		
 		public void SendChat(string chatText)
 		{
-			if (connected)
+			if (m_connected)
 			{
 				LobbyChatMsg msg = new LobbyChatMsg(chatText);
 				

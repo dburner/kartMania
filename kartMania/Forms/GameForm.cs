@@ -47,64 +47,16 @@ namespace kartMania.Forms
 			gl.BlendFunc(OpenGL.GL_SRC_ALPHA, OpenGL.GL_ONE_MINUS_SRC_ALPHA);
 			gl.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_MAG_FILTER, OpenGL.GL_NEAREST  );
 			gl.TexParameter(OpenGL.GL_TEXTURE_2D, OpenGL.GL_TEXTURE_MIN_FILTER, OpenGL.GL_LINEAR  );
+			
 			Engine.Instance.StartGame();
-			Engine.Instance.renEngine.setGl(gl);
+			Engine.Instance.m_renderEngine.setGl(gl);
 		}
 		
 		
 		
 		void OpenGLControlOpenGLDraw(object sender, PaintEventArgs e)
 		{
-			//DrawNew();
-			Engine.Instance.renEngine.Render(openGLControl.Width, openGLControl.Height);
-		}
-		
-		
-		float angle = 0;
-		void DrawNew()
-		{
-			gl.MatrixMode(OpenGL.GL_PROJECTION);
-			gl.LoadIdentity();
-			gl.SetDimensions(openGLControl.Width, openGLControl.Height);
-			gl.Ortho2D(0, openGLControl.Width, 0, openGLControl.Height);
-			
-			gl.MatrixMode(MatrixMode.Modelview);
-			gl.LoadIdentity();
-			
-			gl.ClearColor(0.3f, 0.3f, 0.3f, 0f);
-			gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT);
-			
-			int x1 = 50;
-			int x2 = x1 + 83;
-			int y1 = 50;
-			int y2 = y1 + 174;
-			
-			gl.Begin(BeginMode.Quads);
-				
-			gl.Color(1f, 1f, 1f);
-			gl.TexCoord(0f, 1f); gl.Vertex(x1, y1);
-    		gl.TexCoord(1f, 1f); gl.Vertex(x2, y1);
-    		gl.TexCoord(1f, 0f); gl.Vertex(x2, y2);
-    		gl.TexCoord(0f, 0f); gl.Vertex(x1, y2);
-    		
-    		//gl.Color(1f, 1f, 1f);
-			//gl.TexCoord(0.5f, 0.5f); gl.Vertex(x1, y1);
-    		//gl.TexCoord(0.5f, 0.5f); gl.Vertex(x2, y1);
-    		//gl.TexCoord(0.5f, 0.5f); gl.Vertex(x2, y2);
-    		//gl.TexCoord(0.5f, 0.5f); gl.Vertex(x1, y2);
-    			
-    		gl.End();
-			
-    		
-    		angle += 0.3f;
+			Engine.Instance.m_renderEngine.Render(openGLControl.Width, openGLControl.Height);
 		}
 	}
 }
-//
-// glMatrixMode (GL_PROJECTION)
-// glLoadIdentity ()
-// glOrtho (0, XSize, YSize, 0, 0, 1)
-// glDisable(GL_DEPTH_TEST)
-// glMatrixMode (GL_MODELVIEW)
-// glLoadIdentity()
-//

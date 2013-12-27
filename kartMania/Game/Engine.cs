@@ -19,10 +19,10 @@ namespace kartMania.Game
 	{
 		// TODO Implement corect singletone instance
 		public static Engine    Instance { get; private set; }
-		public static NetEngine Network  { get { return Instance.netEngine; } }
+		public static NetEngine Network  { get { return Instance.m_networkEngine; } }
 		
-		private NetEngine    netEngine;
-		public  RenderEngine renEngine;
+		private NetEngine    m_networkEngine;
+		public  RenderEngine m_renderEngine;
 		
 		public Engine()
 		{
@@ -32,14 +32,14 @@ namespace kartMania.Game
 		
 		public void Init()
 		{
-			netEngine = new NetEngine();
+			m_networkEngine = new NetEngine();
 			//netEngine.
 			//netEngine.NewNetMsg += new NetManager.NewNetMsgEventHandler( LobbyMsgHandler.HandleMsg );
 		}
 		
 		public void StartGame()
 		{
-			renEngine = new RenderEngine(1);
+			m_renderEngine = new RenderEngine(1);
 		}
 	}
 }

@@ -15,8 +15,8 @@ namespace kartMania.Physics
 	public class Vec2
 	{
 		//TODO overwrite += operator for extra optimization
-		private double mx; //TODO put float
-		private double my;
+		private double m_x; //TODO put float
+		private double m_y;
 		
 		private const double TwoPi = 2 * Math.PI;
 		
@@ -27,8 +27,8 @@ namespace kartMania.Physics
 		/// </summary>
 		public Vec2()
 		{
-			mx = 0;
-			my = 0;
+			m_x = 0;
+			m_y = 0;
 		}
 		
 		/// <summary>
@@ -36,14 +36,14 @@ namespace kartMania.Physics
 		/// </summary>
 		public Vec2(double x, double y)
 		{
-			mx = x;
-			my = y;
+			m_x = x;
+			m_y = y;
 		}
 		
 		public Vec2(Vec2 v)
 		{
-			mx = v.mx;
-			my = v.my;
+			m_x = v.m_x;
+			m_y = v.m_y;
 		}
 		
 		#endregion
@@ -54,29 +54,8 @@ namespace kartMania.Physics
 		{
 			double mag = Length;
 			
-			mx /= mag;
-			my /= mag;			
-		}
-		
-		//TODO Try rotating using projection
-		/// <summary>
-		/// DEPRECATED
-		/// </summary>
-		public void RotateOld(Vec2 center, double angle)
-		{
-			mx -= center.mx;
-			my -= center.my;
-			
-			double len = Length;
-			double ang = Angle;
-			
-			ang += angle;
-			
-			mx = len * Math.Cos(ang);
-			my = len * Math.Sin(ang);
-			
-			mx += center.mx;
-			my += center.my;
+			m_x /= mag;
+			m_y /= mag;			
 		}
 		
 		public void Rotate(Vec2 center, double angle)
@@ -86,20 +65,20 @@ namespace kartMania.Physics
 			double sin = Math.Sin(angle);
 			double cos = Math.Cos(angle);
 			
-			mx -= center.X;
-			my -= center.Y;
+			m_x -= center.X;
+			m_y -= center.Y;
 			
-			x = mx * cos - my * sin;
-			y = mx * sin + my * cos;
+			x = m_x * cos - m_y * sin;
+			y = m_x * sin + m_y * cos;
 			
-			mx = x + center.X;
-			my = y + center.Y;
+			m_x = x + center.X;
+			m_y = y + center.Y;
 			
 		}
 		
 		public double DotProduct(Vec2 u)
 		{
-			return mx * u.mx + my * u.my;  //may not be real
+			return m_x * u.m_x + m_y * u.m_y;  //may not be real
 		}
 		
 		public Vec2 Project(Vec2 u)
@@ -118,32 +97,32 @@ namespace kartMania.Physics
 		{
 			get
 			{
-				return Math.Sqrt(mx * mx + my * my);
+				return Math.Sqrt(m_x * m_x + m_y * m_y);
 			}
 		}
 		
 		public double LengthSquare
 		{
-			get { return mx * mx + my * my; }
+			get { return m_x * m_x + m_y * m_y; }
 		}
 		
 		public double X
 		{
-			get { return mx;  }
-			set { mx = value; }
+			get { return m_x;  }
+			set { m_x = value; }
 		}
 		
 		public double Y
 		{
-			get { return my;  }
-			set { my = value; }
+			get { return m_y;  }
+			set { m_y = value; }
 		}
 		
 		public double Angle
 		{
 			get
 			{
-				double angle = Math.Atan2(my, mx);
+				double angle = Math.Atan2(m_y, m_x);
 				if (angle < 0)
 					angle += TwoPi;
 				
@@ -157,22 +136,22 @@ namespace kartMania.Physics
 		
 		public static Vec2 operator + (Vec2 a, Vec2 b)
 		{
-			return new Vec2(a.mx + b.mx, a.my + b.my);
+			return new Vec2(a.m_x + b.m_x, a.m_y + b.m_y);
 		}
 		
 		public static Vec2 operator - (Vec2 a, Vec2 b)
 		{
-			return new Vec2(a.mx - b.mx, a.my - b.my);
+			return new Vec2(a.m_x - b.m_x, a.m_y - b.m_y);
 		}
 		
 		public static Vec2 operator * (Vec2 u, double r)
 		{
-			return new Vec2(u.mx * r, u.my * r);
+			return new Vec2(u.m_x * r, u.m_y * r);
 		}
 		
 		public static Vec2 operator / (Vec2 u, double r)
 		{
-			return new Vec2(u.mx / r, u.my / r);
+			return new Vec2(u.m_x / r, u.m_y / r);
 		}
 		
 		/// <summary>
@@ -180,7 +159,7 @@ namespace kartMania.Physics
 		/// </summary>
 		public static double operator ^ ( Vec2 a, Vec2 b)
 		{
-			return a.mx * b.my - a.my * b.mx;
+			return a.m_x * b.m_y - a.m_y * b.m_x;
 		}
 		
 		#endregion

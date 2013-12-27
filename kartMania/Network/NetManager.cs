@@ -27,19 +27,22 @@ namespace kartMania.Network
 		private static ushort firstLobbyValue = (ushort)NetLobbyService.FirstValue;
 		private static ushort  lastLobbyValue = (ushort)NetLobbyService.LastValue;
 		
+		private INetMsgHandler m_msgHandler;
+		
 		public NetManager()
 		{	
+			m_msgHandler = new LobbyMsgHandler();//new LobbyMsgHandlerWPF();
 		}
 		
 		public new void Connect(string host, int port)
 		{
-			if ( !connected)
+			if ( !m_connected)
 				base.Connect(host, port);
 		}
 		
 		protected override void OnDataReceived()
 		{
-			NetMsg msg = msgQueue.DequeueAsNetMsg();
+			NetMsg msg = m_msgQueue.DequeueAsNetMsg();
 			
 			if (msg != null)
 				OnMessageReceived(msg);
@@ -48,7 +51,7 @@ namespace kartMania.Network
 		protected virtual void OnMessageReceived(NetMsg msg)
 		{
 			if (IsLobbyService(msg.Service))
-				LobbyMsgHandler.HandleMsg(msg);
+				m_msgHandler.HandleMsg(msg);
 			//NewNetMsg(msg);
 		}
 		

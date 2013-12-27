@@ -9,29 +9,30 @@
 			VerticalAlignment="Top"
 			Margin="42,274,0,0"
 			Width="468"
-			Height="226">
+			Height="226"
+			ItemsSource= "{Binding GameRooms}">
 			<ListView.View>
 				<GridView
 					AllowsColumnReorder="true"
 					ColumnHeaderToolTip="Player rooms">
 					<GridViewColumn
-						DisplayMemberBinding="{Binding Path=RoomName}"
+						DisplayMemberBinding="{Binding RoomName}"
 						Header="Room name"
 						Width="100" />
 					<GridViewColumn
-						DisplayMemberBinding="{Binding Path=PlayersCount}"
+						DisplayMemberBinding="{Binding PlayersCount}"
 						Header="Players"
 						Width="80" />
 					<GridViewColumn
-						DisplayMemberBinding="{Binding Path=TrackName}"
+						DisplayMemberBinding="{Binding TrackName}"
 						Header="Track name"
 						Width="100" />
 					<GridViewColumn
-						DisplayMemberBinding="{Binding Path=OwnerName}"
+						DisplayMemberBinding="{Binding OwnerName}"
 						Header="Owner"
 						Width="100" />
 					<GridViewColumn
-						DisplayMemberBinding="{Binding Path=HasPassword}"
+						DisplayMemberBinding="{Binding HasPassword}"
 						Header="Password"
 						Width="80" />
 				</GridView>

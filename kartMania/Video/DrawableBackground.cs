@@ -43,15 +43,6 @@ namespace kartMania.Video
 		{
 			float width = RenderEngine.Width;
 			float height = RenderEngine.Height;
-//			mTexCoords[0] = new Vec2(0,1);
-//			mTexCoords[1] = new Vec2(1,1);
-//			mTexCoords[2] = new Vec2(1,0);
-//			mTexCoords[3] = new Vec2(0,0);
-//			
-//			mPoints[0] = new Vec2(0	   , height);
-//			mPoints[1] = new Vec2(width, height);
-//			mPoints[2] = new Vec2(width, 0     );
-//			mPoints[3] = new Vec2(0	   , 0     );
 			
 			mTexCoords[0] = new Vec2(0,0);
 			mTexCoords[1] = new Vec2(1,0);
@@ -68,11 +59,6 @@ namespace kartMania.Video
 			texture = new Texture();
 			texture.Create(gl, texturePath);
 			texture.Bind(gl);
-			//GenerateTexture(texturePath);
-//			MemoryStream ms = new MemoryStream();
-//			Bitmap yourBitmap = new Bitmap(texturePath);
-//			yourBitmap.Save(ms, ImageFormat.Bmp);//.Save(ms, ImageFormat.Bmp);
-//        	bitmapData = ms.ToArray();
 		}
 		
 		public void Draw()

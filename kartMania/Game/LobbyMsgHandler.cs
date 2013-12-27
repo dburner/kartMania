@@ -21,13 +21,13 @@ namespace kartMania.Game
 	/// <summary>
 	/// Description of LobbyMsgHandler.
 	/// </summary>
-	public static class LobbyMsgHandler
+	public class LobbyMsgHandler : INetMsgHandler //TODO: make this a non static class and implement INetMsgHandler
 	{
 		private delegate void MessageHandler(NetMsg msg);
 		
-		private static Dictionary<NetLobbyService, MessageHandler> m_messageHandlers;
+		private Dictionary<NetLobbyService, MessageHandler> m_messageHandlers;
 		
-		static LobbyMsgHandler()
+		public LobbyMsgHandler()
 		{
 			m_messageHandlers = new Dictionary<NetLobbyService, LobbyMsgHandler.MessageHandler>();
 			
@@ -41,7 +41,7 @@ namespace kartMania.Game
 			m_messageHandlers.Add(NetLobbyService.GameRoomsList,         GameRoomsList        );
 		}
 		
-		public static void HandleMsg(NetMsg msg)
+		public void HandleMsg(NetMsg msg)
 		{
 			//TODO Use delegates array for all this
 			NetLobbyService service = (NetLobbyService)msg.Service;
@@ -57,21 +57,21 @@ namespace kartMania.Game
 			}		
 		}
 		
-		private static void LobbyChat(NetMsg msg)
+		private void LobbyChat(NetMsg msg)
 		{
 			LobbyChatMsg chatMsg = (LobbyChatMsg)msg;
 			
 			MainForm.Instance.PasteChatText(chatMsg.Message);
 		}
 		
-		private static void GameRoomCreated(NetMsg msg)
+		private void GameRoomCreated(NetMsg msg)
 		{
 			GameRoomCreatedMsg gameRoomMsg = (GameRoomCreatedMsg)msg;
 			
 			MainForm.Instance.AddGameRoom(gameRoomMsg.GameRoomInfo);
 		}
 		
-		private static void JoinGameRoomSucces(NetMsg msg)
+		private void JoinGameRoomSucces(NetMsg msg)
 		{
 			JoinGameRoomSuccesMsg joinMsg = (JoinGameRoomSuccesMsg)msg;
 				
@@ -79,7 +79,7 @@ namespace kartMania.Game
 		  //MainForm.Instance.CreateGameRoomForm(playerNames, playerIds, isOwner);
 		}
 		
-		private static void GameRoomPlayerJoined(NetMsg msg)
+		private void GameRoomPlayerJoined(NetMsg msg)
 		{
 			GameRoomPlayerJoinedMsg playerJoinedMsg = (GameRoomPlayerJoinedMsg)msg;
 			
@@ -90,14 +90,14 @@ namespace kartMania.Game
 				GameRoomForm.Instance.AddPlayer(playerName, playerId);
 		}
 		
-		private static void GameRoomPlayerLeft(NetMsg msg)
+		private void GameRoomPlayerLeft(NetMsg msg)
 		{
 			GameRoomPlayerLeftMsg leftMsg = (GameRoomPlayerLeftMsg)msg;
 			
 			GameRoomForm.Instance.RemovePlayer(leftMsg.PlayerName);
 		}
 		
-		private static void GameRoomUpdatePlayers(NetMsg msg)
+		private void GameRoomUpdatePlayers(NetMsg msg)
 		{			
 			GameRoomUpdatePlayersMsg updateMsg = (GameRoomUpdatePlayersMsg)msg;
 
@@ -107,7 +107,7 @@ namespace kartMania.Game
 			MainForm.Instance.UpdateGameRoom(roomId, players);
 		}
 		
-		private static void GameRoomDestroyed(NetMsg msg)
+		private void GameRoomDestroyed(NetMsg msg)
 		{
 			GameRoomDestroyedMsg destroyedMsg = (GameRoomDestroyedMsg)msg;
 			
@@ -121,7 +121,7 @@ namespace kartMania.Game
 			//TODO fix, check gameroomform for room id
 		}
 		
-		private static void GameRoomsList(NetMsg msg)
+		private void GameRoomsList(NetMsg msg)
 		{
 			GameRoomsListMsg roomsMsg = (GameRoomsListMsg)msg;
 			

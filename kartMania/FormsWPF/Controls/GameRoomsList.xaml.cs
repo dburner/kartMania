@@ -22,9 +22,13 @@ namespace kartMania.FormsWPF.Controls
 	/// </summary>
 	public partial class GameRoomsList : UserControl
 	{
+		GameRoomViewModel m_viewModel = new GameRoomViewModel();
+			
 		public GameRoomsList()
 		{
 			InitializeComponent();
+			
+			this.DataContext = m_viewModel;
 		}
 	}
 }

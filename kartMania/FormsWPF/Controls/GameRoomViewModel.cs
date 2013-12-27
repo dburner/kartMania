@@ -8,6 +8,8 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
+using kartManiaCommons.Structs;
 
 namespace kartMania.FormsWPF.Controls
 {
@@ -16,7 +18,7 @@ namespace kartMania.FormsWPF.Controls
 	/// </summary>
 	public class GameRoomViewModel : INotifyPropertyChanged
 	{
-		
+		ObservableCollection<GameRoomInfo> m_gameRooms = new ObservableCollection<GameRoomInfo>();
 		
 		public GameRoomViewModel()
 		{
@@ -24,7 +26,24 @@ namespace kartMania.FormsWPF.Controls
 		
 		#region Properties
 		
-				
+		public ObservableCollection<GameRoomInfo> GameRooms
+		{
+			get { return m_gameRooms; }
+		}
+		
+		public void AddGameRoom(GameRoomInfo gri)
+		{
+			m_gameRooms.Add(gri);
+			
+			RaisePropertyChanged("GameRooms");
+		}
+		
+		public void RemoveGameRoom(GameRoomInfo gri)
+		{
+			GameRoomInfo toDelete = m_gameRooms.First( s => s.gameRoomId == gri.gameRoomId );
+			
+			m_gameRooms.Remove(toDelete);
+		}
 
 		
 		#endregion

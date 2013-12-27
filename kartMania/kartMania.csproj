@@ -98,9 +98,11 @@
     </Compile>
     <Compile Include="Game\LobbyMsgHandler.cs" />
     <Compile Include="Game\GameCar.cs" />
+    <Compile Include="Game\LobbyMsgHandlerWPF.cs" />
     <Compile Include="Game\NetEngine.cs" />
     <Compile Include="Game\RenderEngine.cs" />
     <Compile Include="Models\GameRoom.cs" />
+    <Compile Include="Network\INetMsgHandler.cs" />
     <Compile Include="Network\NetClient.cs" />
     <Compile Include="Network\NetManager.cs" />
     <Compile Include="Physics\Contact.cs" />
